@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %} 
+Sunright Cafe | Home
+{% endblock %}
+
+{% block content %} 
+<div>
+    <h1>Menu</h1>
+
+    {% for tag, drinks in all_drinks.items() %}
+        <h2>{{tag}}</h2>
+        <div class="menu-container">
+            {% for drink in drinks %}
+            <button class="card menu-sub-div" data-bs-toggle="modal" data-bs-target={{ "#" + drink.name + "modal"}}>
+                <div class="card-left">
+                    <b class="drink-title">{{drink.name}}</b>
+                    <br>
+                    <span class="desc-full">{{drink.desc}}</span>
+                    <span class="desc-small">
+                        {{drink.desc[0:70]}}
+                        {% if drink.desc|length > 70 %}
+                        ...
+                        {% endif %}
+                    </span>
+                    <span class="desc-medium">{{drink.desc[0:20]}}...</span>                                        
+                    <div class="menu-price">{{drink.price}}</div>
+                </div>
+                <img class="card-right" src={{drink.img_url}}>
+            </button>
+
+            <!-- Modal per drink -->
+            <div class="modal fade" id={{drink.name + "modal"}} tabindex="-1" aria-labelledby={{drink.name + "modal"}} aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <img src={{drink.img_url}} width="100%">
+
+                        <h1 class="modal-title fs-5" id={{drink.name + "modal"}}>{{drink.name}}</h1>
+                        {{drink.desc}}
+                        <hr>
+
+                        <b>Sweetness</b>
+                        <br>
+                        Required*
+                        <br>
+                        Please select 1
+                        <br>
+                        
+                        <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="option1">100%</label>
+
+                        <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="option2">50%</label>
+
+                        <hr>
+
+                        <b>Ice Level</b>
+                        <br>
+                        Required*
+                        <br>
+                        Please select 1
+
+                        <hr>
+
+                        {% if tag == "milk tea" or tag == "cheese foam" %}
+                            <b>Milk Type</b>
+                            <br>
+                            Required*
+                            <br>
+                            Please select 1
+
+                            <hr>
+                        {% endif %}
+
+                        <b>Toppings</b>
+                        <br>
+                        Please select up to 3
+                        <br>
+                        {% for topping in toppings %}
+                            {{topping.name}}: {{topping.price}}
+                            <br>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+        <br>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
