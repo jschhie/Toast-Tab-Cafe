@@ -8,9 +8,8 @@
 ## Website Demo
 > work in progress!
 
-### Cafe Store/Menu
-
 ### Customize Drink 
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/customize-drink-modal.png">
 
 ## todo's
 * nav bar for menu
