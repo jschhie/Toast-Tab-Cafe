@@ -8,7 +8,7 @@
 ## Website Demo
 > (work in progress!)
 
-> Cafe Menu
+### Cafe Menu
 <img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/new-menu.png">
 
 ### Customize Drink 
