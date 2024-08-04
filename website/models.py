@@ -16,3 +16,9 @@ class Topping(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), unique=True)
     price = db.Column(db.String(20))
+
+
+class MilkType(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30), unique=True)
+    price = db.Column(db.String(20))

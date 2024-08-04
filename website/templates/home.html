@@ -39,7 +39,7 @@ Sunright Cafe | Home
                     </div>
 
                     <div class="modal-body">
-                        <img src={{drink.img_url}} width="100%">
+                        <img class="modal-img" src={{drink.img_url}} width="100%">
 
                         <h1 class="modal-title fs-5" id={{drink.name + "modal"}}>{{drink.name}}</h1>
                         {{drink.desc}}
@@ -51,12 +51,19 @@ Sunright Cafe | Home
                         <br>
                         Please select 1
                         <br>
-                        
-                        <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off">
-                        <label class="btn btn-outline-secondary" for="option1">100%</label>
 
-                        <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
-                        <label class="btn btn-outline-secondary" for="option2">50%</label>
+                        <!-- 100% Sugar -->
+                        <input type="radio" class="btn-check" name="sugar_options" id={{"sugar100_" + drink.id|string }} autocomplete="off">
+                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"sugar100_" + drink.id|string }}>100%</label>
+                        <!-- 75% Sugar -->
+                        <input type="radio" class="btn-check" name="sugar_options" id={{"sugar75_" + drink.id|string }} autocomplete="off">
+                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"sugar75_" + drink.id|string }}>75%</label>
+                        <!-- 50% Sugar -->
+                        <input type="radio" class="btn-check" name="sugar_options" id={{"sugar50_" + drink.id|string }} autocomplete="off">
+                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"sugar50_" + drink.id|string }}>50%</label>
+                        <!-- 0% Sugar -->
+                        <input type="radio" class="btn-check" name="sugar_options" id={{"sugar0_" + drink.id|string }} autocomplete="off">
+                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"sugar0_" + drink.id|string }}>0%</label>
 
                         <hr>
 
@@ -65,16 +72,38 @@ Sunright Cafe | Home
                         Required*
                         <br>
                         Please select 1
+                        <br>
 
+                        <input type="radio" class="btn-check" name="ice_options" id={{"ice110_" + drink.id|string }} autocomplete="off">
+                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"ice110_" + drink.id|string }}>Extra Ice</label>
+
+                        <input type="radio" class="btn-check" name="ice_options" id={{"ice100_" + drink.id|string }} autocomplete="off">
+                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"ice100_" + drink.id|string }}>Regular Ice</label>
+
+                        <input type="radio" class="btn-check" name="ice_options" id={{"ice50_" + drink.id|string }} autocomplete="off">
+                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"ice50_" + drink.id|string }}>Less Ice</label>
+
+                        <input type="radio" class="btn-check" name="ice_options" id={{"ice0_" + drink.id|string }} autocomplete="off">
+                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"ice0_" + drink.id|string }}>No Ice</label>
                         <hr>
 
-                        {% if tag == "milk tea" or tag == "cheese foam" %}
+                        {% if tag != "fruit" %}
                             <b>Milk Type</b>
                             <br>
                             Required*
                             <br>
                             Please select 1
-
+                            <br>
+                            
+                            {% for milk_type in milk_types %}
+                            <input type="radio" class="btn-check" name="milk_options" id={{ milk_type.name + "_" + drink.id|string }} autocomplete="off">
+                            <label class="btn btn-outline-secondary custom-radio-btn" for={{ milk_type.name + "_" + drink.id|string }}>
+                                <span class="milk_type_label">{{milk_type.name}} milk</span>
+                                {% if milk_type.price != "$0.00" %}
+                                    <span class="milk_type_price_label">+{{milk_type.price}}</span>
+                                {% endif %}
+                            </label>
+                            {% endfor %}
                             <hr>
                         {% endif %}
 
@@ -83,7 +112,7 @@ Sunright Cafe | Home
                         Please select up to 3
                         <br>
                         {% for topping in toppings %}
-                            {{topping.name}}: {{topping.price}}
+                            {{topping.name}} +{{topping.price}}
                             <br>
                         {% endfor %}
 

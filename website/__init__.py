@@ -21,7 +21,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
 
     # create or retrieve existing DB
-    from .models import Drink, Topping
+    from .models import Drink, Topping, MilkType
     create_database(app)
 
     return app
@@ -31,7 +31,7 @@ def create_app():
 def create_database(app):
     if not path.exists('website/' + DB_NAME):
         with app.test_request_context():
-            from .models import Drink, Topping
+            from .models import Drink, Topping, MilkType
             db.create_all(app=app)
 
             ###### Insert drinks into database ######
@@ -89,4 +89,20 @@ def create_database(app):
             for name, price in zip(toppings_name, toppings_prices):
                 new_topping = Topping(name=name, price=price)
                 db.session.add(new_topping)
+                db.session.commit()
+
+            ###### Insert milk types into database ######
+            milk_names = ["house",
+                          "almond",
+                          "oat",
+                          "fresh"]
+        
+            milk_prices = ["$0.00",
+                           "$1.50",
+                           "$1.50",
+                           "$0.00"]
+            
+            for name, price in zip(milk_names, milk_prices):
+                milk_type = MilkType(name=name, price=price)
+                db.session.add(milk_type)
                 db.session.commit()

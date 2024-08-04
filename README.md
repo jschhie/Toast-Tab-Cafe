@@ -6,7 +6,11 @@
 * Responsive Flask web app that simulates Toast Tab's online ordering system for cafes
 
 ## Website Demo
-* coming soon
+> work in progress!
+
+### Cafe Store/Menu
+
+### Customize Drink 
 
 ## todo's
 * nav bar for menu
