@@ -60,7 +60,7 @@ body {
     margin-bottom: 10px;
 }
 
-.custom-radio-btn {
+.custom-btn {
     width: 100%; /* mobile view */
     margin-top: 10px;
     color: black;
@@ -71,11 +71,11 @@ body {
 .milk_type_label {
     background-color: aquamarine;
 }
-
-.milk_type_price_label {
-    background-color: blueviolet;
-}
 */
+
+.custom_price_label {
+    font-size: small;
+}
 
 
 
@@ -102,7 +102,7 @@ body {
         display: block;
     }
 
-    .custom-radio-btn {
+    .custom-btn {
         width: 45%;
         margin: 10px;
     }

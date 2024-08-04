@@ -45,49 +45,54 @@ Sunright Cafe | Home
                         {{drink.desc}}
                         <hr>
 
-                        <b>Sweetness</b>
-                        <br>
-                        Required*
-                        <br>
-                        Please select 1
-                        <br>
-
-                        <!-- 100% Sugar -->
-                        <input type="radio" class="btn-check" name="sugar_options" id={{"sugar100_" + drink.id|string }} autocomplete="off">
-                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"sugar100_" + drink.id|string }}>100%</label>
-                        <!-- 75% Sugar -->
-                        <input type="radio" class="btn-check" name="sugar_options" id={{"sugar75_" + drink.id|string }} autocomplete="off">
-                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"sugar75_" + drink.id|string }}>75%</label>
-                        <!-- 50% Sugar -->
-                        <input type="radio" class="btn-check" name="sugar_options" id={{"sugar50_" + drink.id|string }} autocomplete="off">
-                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"sugar50_" + drink.id|string }}>50%</label>
-                        <!-- 0% Sugar -->
-                        <input type="radio" class="btn-check" name="sugar_options" id={{"sugar0_" + drink.id|string }} autocomplete="off">
-                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"sugar0_" + drink.id|string }}>0%</label>
+                        <div class="sugar-lvl-div">
+                            <b>Sweetness</b>
+                            <br>
+                            Required*
+                            <br>
+                            Please select 1
+                            <br>
+                            <!-- 100% Sugar -->
+                            <input type="radio" class="btn-check sugar-radio" name="sugar_options" id={{"sugar100_" + drink.id|string }} autocomplete="off">
+                            <label class="btn btn-outline-dark custom-btn" for={{"sugar100_" + drink.id|string }}>100%</label>
+                            <!-- 75% Sugar -->
+                            <input type="radio" class="btn-check sugar-radio" name="sugar_options" id={{"sugar75_" + drink.id|string }} autocomplete="off">
+                            <label class="btn btn-outline-dark custom-btn" for={{"sugar75_" + drink.id|string }}>75%</label>
+                            <!-- 50% Sugar -->
+                            <input type="radio" class="btn-check sugar-radio" name="sugar_options" id={{"sugar50_" + drink.id|string }} autocomplete="off">
+                            <label class="btn btn-outline-dark custom-btn" for={{"sugar50_" + drink.id|string }}>50%</label>
+                            <!-- 0% Sugar -->
+                            <input type="radio" class="btn-check sugar-radio" name="sugar_options" id={{"sugar0_" + drink.id|string }} autocomplete="off">
+                            <label class="btn btn-outline-dark custom-btn" for={{"sugar0_" + drink.id|string }}>0%</label>
+                        </div>
 
                         <hr>
 
-                        <b>Ice Level</b>
-                        <br>
-                        Required*
-                        <br>
-                        Please select 1
-                        <br>
+                        <div class="ice-lvl-div">
+                            <b>Ice Level</b>
+                            <br>
+                            Required*
+                            <br>
+                            Please select 1
+                            <br>
+                            <!-- Extra Ice -->
+                            <input type="radio" class="btn-check ice-radio" name="ice_options" id={{"ice110_" + drink.id|string }} autocomplete="off">
+                            <label class="btn btn-outline-dark custom-btn" for={{"ice110_" + drink.id|string }}>Extra Ice</label>
+                            <!-- Regular Ice -->
+                            <input type="radio" class="btn-check ice-radio" name="ice_options" id={{"ice100_" + drink.id|string }} autocomplete="off">
+                            <label class="btn btn-outline-dark custom-btn" for={{"ice100_" + drink.id|string }}>Regular Ice</label>
+                            <!-- Less Ice -->
+                            <input type="radio" class="btn-check ice-radio" name="ice_options" id={{"ice50_" + drink.id|string }} autocomplete="off">
+                            <label class="btn btn-outline-dark custom-btn" for={{"ice50_" + drink.id|string }}>Less Ice</label>
+                            <!-- No Ice -->
+                            <input type="radio" class="btn-check ice-radio" name="ice_options" id={{"ice0_" + drink.id|string }} autocomplete="off">
+                            <label class="btn btn-outline-dark custom-btn" for={{"ice0_" + drink.id|string }}>No Ice</label>
+                        </div>
 
-                        <input type="radio" class="btn-check" name="ice_options" id={{"ice110_" + drink.id|string }} autocomplete="off">
-                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"ice110_" + drink.id|string }}>Extra Ice</label>
-
-                        <input type="radio" class="btn-check" name="ice_options" id={{"ice100_" + drink.id|string }} autocomplete="off">
-                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"ice100_" + drink.id|string }}>Regular Ice</label>
-
-                        <input type="radio" class="btn-check" name="ice_options" id={{"ice50_" + drink.id|string }} autocomplete="off">
-                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"ice50_" + drink.id|string }}>Less Ice</label>
-
-                        <input type="radio" class="btn-check" name="ice_options" id={{"ice0_" + drink.id|string }} autocomplete="off">
-                        <label class="btn btn-outline-secondary custom-radio-btn" for={{"ice0_" + drink.id|string }}>No Ice</label>
                         <hr>
 
-                        {% if tag != "fruit" %}
+                        <div class="milk-type-div">
+                            {% if tag != "fruit" %}
                             <b>Milk Type</b>
                             <br>
                             Required*
@@ -96,31 +101,37 @@ Sunright Cafe | Home
                             <br>
                             
                             {% for milk_type in milk_types %}
-                            <input type="radio" class="btn-check" name="milk_options" id={{ milk_type.name + "_" + drink.id|string }} autocomplete="off">
-                            <label class="btn btn-outline-secondary custom-radio-btn" for={{ milk_type.name + "_" + drink.id|string }}>
+                            <input type="radio" class="btn-check milk-radio" name="milk_options" id={{ milk_type.name + "_" + drink.id|string }} autocomplete="off">
+                            <label class="btn btn-outline-dark custom-btn" for={{ milk_type.name + "_" + drink.id|string }}>
                                 <span class="milk_type_label">{{milk_type.name}} milk</span>
                                 {% if milk_type.price != "$0.00" %}
-                                    <span class="milk_type_price_label">+{{milk_type.price}}</span>
+                                    <span class="custom_price_label">+{{milk_type.price}}</span>
                                 {% endif %}
                             </label>
                             {% endfor %}
                             <hr>
                         {% endif %}
+                        </div>
 
-                        <b>Toppings</b>
-                        <br>
-                        Please select up to 3
-                        <br>
-                        {% for topping in toppings %}
-                            {{topping.name}} +{{topping.price}}
+                        <div class="toppings-div">
+                            <b>Toppings</b>
                             <br>
-                        {% endfor %}
-
+                            Please select up to 3
+                            <br>
+                                {% for topping in toppings %}
+                                <!-- note: some topping.name(s) have a whitespace: grass jelly, etc -->
+                                <input type="checkbox" class="btn-check topping-checkbox" name="toppings_options" id={{ topping.name.replace(" ", "_") + "_" + drink.id|string }} autocomplete="off" onchange="chooseToppings(this)">
+                                <label class="btn btn-outline-dark custom-btn" for={{ topping.name.replace(" ", "_") + "_" + drink.id|string }}>
+                                    <span class="custom_topping_name">{{topping.name}}</span>
+                                    <span class="custom_price_label">+{{topping.price}}</span>
+                                </label>
+                                {% endfor %}
+                        </div>
                     </div>
 
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-dark" onclick="addToCart(this)">Add to Cart</button>
                     </div>
                 </div>
                 </div>
