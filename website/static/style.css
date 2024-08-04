@@ -42,8 +42,9 @@ body {
 }
 
 .card-right {
-    width: 25%;
-    height: 100%;
+    /* width: 25%; */
+    width: 130px; /* make square thumbnail */
+    height: 100%; /* 130px */
     position: absolute;
     right: 0;
     top: 0;
@@ -55,6 +56,29 @@ body {
     display: none;
 }
 
+.modal-img {
+    margin-bottom: 10px;
+}
+
+.custom-radio-btn {
+    width: 100%; /* mobile view */
+    margin-top: 10px;
+    color: black;
+    text-align: left;
+}
+
+/*
+.milk_type_label {
+    background-color: aquamarine;
+}
+
+.milk_type_price_label {
+    background-color: blueviolet;
+}
+*/
+
+
+
 @media all and (min-width:768px) {
     /* medium */
     .menu-sub-div {
@@ -65,9 +89,10 @@ body {
         width: 60%;
     }
 
+    /*
     .card-right {
         width: 40%;
-    }
+    }*/
 
     .desc-small {
         display: none;
@@ -76,7 +101,13 @@ body {
     .desc-medium {
         display: block;
     }
+
+    .custom-radio-btn {
+        width: 45%;
+        margin: 10px;
+    }
 }
+
 
 @media all and (min-width:992px) {
     /* large, xlarge */
