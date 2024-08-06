@@ -6,9 +6,9 @@
 * Responsive Flask web app that simulates Toast Tab's online ordering system for cafes
 
 ## Website Demo
-> (work in progress!)
 
 ### Cafe Menu
+> (work in progress)
 <img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/new-menu.png">
 
 ### Customize Drink 
@@ -18,14 +18,20 @@
 > Optional: toppings (max == 3)
 <img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/custom-drink-2.png">
 
+### Cart 
+> (work in progress)
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/cart-draft.png">
+
 ## todo's
 * nav bar for menu
 * search bar for menu
 * menu modal
   * [x] toppings: max 3 options
 * cart
-  * [ ] total price for a single drink & entire order 
-  * [ ] add a single item/drink to cart
+  * [x] total price for a single drink: base price + milk type + toppings 
+    * [ ] Drink Modal:: Add to Cart Button: update label with total price
+  * [ ] total price for entire order 
+  * [x] add a single drink to cart
   * [ ] edit item
   * [ ] remove item
   * [ ] multiply item    
