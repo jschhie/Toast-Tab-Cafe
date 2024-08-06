@@ -12,7 +12,8 @@ Sunright Cafe | Home
         <h2>{{tag}}</h2>
         <div class="menu-container">
             {% for drink in drinks %}
-            <button class="card menu-sub-div" data-bs-toggle="modal" data-bs-target={{ "#" + drink.name + "modal"}}>
+            <!-- edit: replaced drink.name with drink.id for data-bs-target variable string -->
+            <button class="card menu-sub-div" data-bs-toggle="modal" data-bs-target={{ "#" + drink.id|string + "modal" }}>
                 <div class="card-left">
                     <b class="drink-title">{{drink.name}}</b>
                     <br>
@@ -30,7 +31,8 @@ Sunright Cafe | Home
             </button>
 
             <!-- Modal per drink -->
-            <div class="modal fade" id={{drink.name + "modal"}} tabindex="-1" aria-labelledby={{drink.name + "modal"}} aria-hidden="true">
+            <!-- edit: changed drink.name to drink.id in id, aria-labelledby -->
+            <div class="modal fade" id={{ drink.id|string + "modal" }} tabindex="-1" aria-labelledby={{ drink.id|string + "modal"}} aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
 
@@ -48,21 +50,21 @@ Sunright Cafe | Home
                         <div class="sugar-lvl-div">
                             <b>Sweetness</b>
                             <br>
-                            Required*
+                            <span class="req-text">Required*</span>
                             <br>
                             Please select 1
                             <br>
                             <!-- 100% Sugar -->
-                            <input type="radio" class="btn-check sugar-radio" name="sugar_options" id={{"sugar100_" + drink.id|string }} autocomplete="off">
+                            <input type="radio" class="btn-check sugar-radio" name="sugar_options" id={{"sugar100_" + drink.id|string }} autocomplete="off" onchange="updateTextColor(this)">
                             <label class="btn btn-outline-dark custom-btn" for={{"sugar100_" + drink.id|string }}>100%</label>
                             <!-- 75% Sugar -->
-                            <input type="radio" class="btn-check sugar-radio" name="sugar_options" id={{"sugar75_" + drink.id|string }} autocomplete="off">
+                            <input type="radio" class="btn-check sugar-radio" name="sugar_options" id={{"sugar75_" + drink.id|string }} autocomplete="off" onchange="updateTextColor(this)">
                             <label class="btn btn-outline-dark custom-btn" for={{"sugar75_" + drink.id|string }}>75%</label>
                             <!-- 50% Sugar -->
-                            <input type="radio" class="btn-check sugar-radio" name="sugar_options" id={{"sugar50_" + drink.id|string }} autocomplete="off">
+                            <input type="radio" class="btn-check sugar-radio" name="sugar_options" id={{"sugar50_" + drink.id|string }} autocomplete="off" onchange="updateTextColor(this)">
                             <label class="btn btn-outline-dark custom-btn" for={{"sugar50_" + drink.id|string }}>50%</label>
                             <!-- 0% Sugar -->
-                            <input type="radio" class="btn-check sugar-radio" name="sugar_options" id={{"sugar0_" + drink.id|string }} autocomplete="off">
+                            <input type="radio" class="btn-check sugar-radio" name="sugar_options" id={{"sugar0_" + drink.id|string }} autocomplete="off" onchange="updateTextColor(this)">
                             <label class="btn btn-outline-dark custom-btn" for={{"sugar0_" + drink.id|string }}>0%</label>
                         </div>
 
@@ -71,21 +73,21 @@ Sunright Cafe | Home
                         <div class="ice-lvl-div">
                             <b>Ice Level</b>
                             <br>
-                            Required*
+                            <span class="req-text">Required*</span>
                             <br>
                             Please select 1
                             <br>
                             <!-- Extra Ice -->
-                            <input type="radio" class="btn-check ice-radio" name="ice_options" id={{"ice110_" + drink.id|string }} autocomplete="off">
+                            <input type="radio" class="btn-check ice-radio" name="ice_options" id={{"ice110_" + drink.id|string }} autocomplete="off" onchange="updateTextColor(this)">
                             <label class="btn btn-outline-dark custom-btn" for={{"ice110_" + drink.id|string }}>Extra Ice</label>
                             <!-- Regular Ice -->
-                            <input type="radio" class="btn-check ice-radio" name="ice_options" id={{"ice100_" + drink.id|string }} autocomplete="off">
+                            <input type="radio" class="btn-check ice-radio" name="ice_options" id={{"ice100_" + drink.id|string }} autocomplete="off" onchange="updateTextColor(this)">
                             <label class="btn btn-outline-dark custom-btn" for={{"ice100_" + drink.id|string }}>Regular Ice</label>
                             <!-- Less Ice -->
-                            <input type="radio" class="btn-check ice-radio" name="ice_options" id={{"ice50_" + drink.id|string }} autocomplete="off">
+                            <input type="radio" class="btn-check ice-radio" name="ice_options" id={{"ice50_" + drink.id|string }} autocomplete="off" onchange="updateTextColor(this)">
                             <label class="btn btn-outline-dark custom-btn" for={{"ice50_" + drink.id|string }}>Less Ice</label>
                             <!-- No Ice -->
-                            <input type="radio" class="btn-check ice-radio" name="ice_options" id={{"ice0_" + drink.id|string }} autocomplete="off">
+                            <input type="radio" class="btn-check ice-radio" name="ice_options" id={{"ice0_" + drink.id|string }} autocomplete="off" onchange="updateTextColor(this)">
                             <label class="btn btn-outline-dark custom-btn" for={{"ice0_" + drink.id|string }}>No Ice</label>
                         </div>
 
@@ -95,13 +97,13 @@ Sunright Cafe | Home
                             {% if tag != "fruit" %}
                             <b>Milk Type</b>
                             <br>
-                            Required*
+                            <span class="req-text">Required*</span>
                             <br>
                             Please select 1
                             <br>
                             
                             {% for milk_type in milk_types %}
-                            <input type="radio" class="btn-check milk-radio" name="milk_options" id={{ milk_type.name + "_" + drink.id|string }} autocomplete="off">
+                            <input type="radio" class="btn-check milk-radio" name="milk_options" id={{ milk_type.name + "_" + drink.id|string }} autocomplete="off" onchange="updateTextColor(this); updateModalPrice(this);">
                             <label class="btn btn-outline-dark custom-btn" for={{ milk_type.name + "_" + drink.id|string }}>
                                 <span class="milk_type_label">{{milk_type.name}} milk</span>
                                 {% if milk_type.price != "$0.00" %}
@@ -131,7 +133,11 @@ Sunright Cafe | Home
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-dark" onclick="addToCart(this)">Add to Cart</button>
+                        <button type="button" class="btn btn-dark" onclick="addToCart(this)">
+                            <span class="add-to-cart-text">Add to Cart</span>
+                            <span class="base-price-text">{{drink.price}}</span>
+                            <span class="base-price-text hidden">{{drink.price}}</span>
+                        </button>
                     </div>
                 </div>
                 </div>
@@ -142,6 +148,17 @@ Sunright Cafe | Home
         <br>
     {% endfor %}
 
+    <div id="cart-div">
+        <h2>Cart</h2>
+        <div class="cart-header row">
+
+            <span class="col cart-col cart-item-quantity">Quantity</span>
+            <span class="col cart-col cart-item-title">Item</span>
+            <span class="col cart-col cart-item-price">Price</span> 
+
+        </div>
+    </div>
+        
 </div>
 
 {% endblock %}

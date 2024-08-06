@@ -3,6 +3,10 @@ body {
     font-size: 1em;
 }
 
+.hidden {
+    display: none;
+}
+
 .desc-full, .desc-medium, .desc-small, .menu-price {
     font-size: 0.9em;
 }
@@ -67,17 +71,22 @@ body {
     text-align: left;
 }
 
-/*
-.milk_type_label {
-    background-color: aquamarine;
-}
-*/
-
 .custom_price_label {
     font-size: small;
 }
 
+.cart-row:nth-child(n+2) {
+    border-top: 1px solid black;
+}
 
+.add-to-cart-text {
+    text-align: left;
+}
+
+.base-price-text {
+    text-align: right;
+    margin-left: 70px;
+}
 
 @media all and (min-width:768px) {
     /* medium */
