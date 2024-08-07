@@ -13,14 +13,14 @@
 
 ### Customize Drink 
 > Required: sweetness, ice level, and milk type
-<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/modal-price.png">
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/qty-btn-1.png">
 
 > Optional: toppings (max == 3)
-<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/modal-price-2.png">
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/qty-btn-2.png">
 
 ### Cart 
 > (work in progress)
-<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/new-cart-draft.png">
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/cart-draft-qty-btn.png">
 
 ## todo's
 * nav bar for menu
@@ -32,9 +32,9 @@
     * [x] Drink Modal:: Add to Cart Button: update label with total price
   * [ ] total price for entire order 
   * [x] add a single drink to cart
-  * [ ] edit item
+  * [ ] edit item/customizations
   * [ ] remove item
-  * [ ] multiply item    
+  * [x] multiply item: min = 1, max = 10
 * checkout page
 * receipt page
 * (relational) database updates
