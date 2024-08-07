@@ -74,13 +74,52 @@ function addToCart(btn) {
     }
     
     // Check if Customer filled out required input for sweetness, ice lvl, and milk type
-    // and color code any missing reqs (in red)
-    let flag = hasMissingReqs(sugar_lvl, ice_lvl, milk_type, sugar_lvl_div, ice_lvl_div, milk_type_div);
-    if (flag) {
-        return;
+    // and color code any missing reqs (red)
+    let missing_reqs = []; // list of missing requirements (ie: ['sweetness', 'ice level', 'milk type'])
+
+    if (sugar_lvl == false) {
+        missing_reqs.push("sweetness level");
+        let req_text = sugar_lvl_div.getElementsByClassName("req-text")[0];
+        req_text.style.color = 'red';
+        req_text.style.fontWeight = 'bold';
+    } 
+
+    if (ice_lvl == false) {
+        missing_reqs.push("ice level");
+        let req_text = ice_lvl_div.getElementsByClassName("req-text")[0];
+        req_text.style.color = 'red';
+        req_text.style.fontWeight = 'bold';
+    } 
+
+    if (milk_type == false) {
+        missing_reqs.push("milk type");
+        let req_text = milk_type_div.getElementsByClassName("req-text")[0];
+        req_text.style.color = 'red';
+        req_text.style.fontWeight = 'bold';
+    } 
+
+    if (missing_reqs.length) {
+        // at least one missing requirement
+        let alert_msg = ["Please select a(n): "];
+        for (let i=0; i < missing_reqs.length; i++) {
+            if (missing_reqs.length >= 2 & i == missing_reqs.length - 1) {
+                // if at least 2 missing reqs and current iterator is at the last index
+                alert_msg.push("and " + missing_reqs[i]);
+            } else {
+                if (missing_reqs.length > 2) {
+                    alert_msg.push(missing_reqs[i] + ", ");
+                } else {
+                    alert_msg.push(missing_reqs[i]);
+                }
+            }
+        }
+        // Alert final error message 
+        alert(alert_msg.join(' '));        
+
     } else {
         // Calculate total price: base drink + milk type + toppings
         let custom_drink_price = parseFloat(parseFloat(base_price) + parseFloat(milk_price)).toFixed(2);
+
         let toppings_prices = Object.values(selected_toppings);
         for (let i=0; i < toppings_prices.length; i++) {
             // omit '+$' characters from each string when adding each
@@ -89,7 +128,7 @@ function addToCart(btn) {
 
         // Add customized drink to cart
         let cart_div = document.getElementById("cart-div");
-        //let drink_name = modal_body_div.getElementsByClassName("modal-title")[0].innerText;
+        let drink_name = modal_body_div.getElementsByClassName("modal-title")[0].innerText;
 
         let cart_row = document.createElement('div');
         cart_row.classList.add('cart-row');
@@ -161,7 +200,8 @@ function getMilkType(milk_type_div) {
 
     for (let i=0; i < all_milk_radios.length; i++) {
         if (all_milk_radios[i].checked) {
-            let milk_type_label = all_milk_radios[i].nextElementSibling;  
+            let milk_type_label = all_milk_radios[i].nextElementSibling;
+                        
             let milk_type = milk_type_label.innerText;
 
             let unwantedIndex = milk_type_label.innerText.indexOf('+'); // remove '+$0.00' price from variable
@@ -173,7 +213,7 @@ function getMilkType(milk_type_div) {
         }
     }
     // No milk type selected
-    return [false, milk_price]; // where milk_type = false, milk_price = '0.00'
+    return [false, milk_price]; // where milk_price = '0.00' by default
 }
 
 
@@ -181,6 +221,7 @@ function getMilkType(milk_type_div) {
 /* === GET TOPPINGS === */
 function getToppings(toppings_div) {
     let selected_toppings = {}; // empty dict
+
     let all_checkboxes = toppings_div.getElementsByClassName("topping-checkbox");
     for (let i=0; i < all_checkboxes.length; i++) {
         if (all_checkboxes[i].checked) {
@@ -198,52 +239,9 @@ function getToppings(toppings_div) {
 
 
 
-/* === CHECK IF FORM HAS MISSING REQUIREMENTS === */
-function hasMissingReqs(sugar_lvl, ice_lvl, milk_type, sugar_lvl_div, ice_lvl_div, milk_type_div) {
-    let missing_reqs = []; // list of missing requirements (ie: ['sweetness', 'ice level', 'milk type'])
-
-    if (sugar_lvl == false) {
-        missing_reqs.push("sweetness level");
-        let req_text = sugar_lvl_div.getElementsByClassName("req-text")[0];
-        req_text.style.color = 'red';
-        req_text.style.fontWeight = 'bold';
-    } 
-
-    if (ice_lvl == false) {
-        missing_reqs.push("ice level");
-        let req_text = ice_lvl_div.getElementsByClassName("req-text")[0];
-        req_text.style.color = 'red';
-        req_text.style.fontWeight = 'bold';
-    } 
-
-    if (milk_type == false) {
-        missing_reqs.push("milk type");
-        let req_text = milk_type_div.getElementsByClassName("req-text")[0];
-        req_text.style.color = 'red';
-        req_text.style.fontWeight = 'bold';
-    } 
-
-    if (missing_reqs.length) {
-        // at least one missing requirement
-        let alert_msg = ["Please select a(n): "];
-        for (let i=0; i < missing_reqs.length; i++) {
-            if (missing_reqs.length >= 2 & i == missing_reqs.length - 1) {
-                // if at least 2 missing reqs and current iterator is at the last index
-                alert_msg.push("and " + missing_reqs[i]);
-            } else {
-                if (missing_reqs.length > 2) {
-                    alert_msg.push(missing_reqs[i] + ", ");
-                } else {
-                    alert_msg.push(missing_reqs[i]);
-                }
-            }
-        }
-        // Alert final error message 
-        alert(alert_msg.join(' '));        
-        return true; // has at least one missing req
-    } else {
-        return false; // all required fields submitted 
-    }
+/* === CHECK IF HAS MISSING REQUIREMENTS === */
+function hasMissingReqs() {
+    return false;
 }
 
 
@@ -252,3 +250,24 @@ function hasMissingReqs(sugar_lvl, ice_lvl, milk_type, sugar_lvl_div, ice_lvl_di
 function updateModalPrice(btn) {
     alert('todo: update modal price: for milk type and toppings');
 }
+
+/*
+function updateModalPrice(btn) {
+    // Check if btn associated with milk type or toppings
+    
+    // Update modal price for milk type
+    let modal_div = btn.parentElement.parentElement.parentElement;
+    let base_price = modal_div.getElementsByClassName("hidden")[0].innerText;
+
+    let milk_price = btn.nextElementSibling.getElementsByClassName("custom_price_label");
+    if (milk_price.length == 0) {
+       milk_price = "0.00";
+       modal_div.getElementsByClassName("base-price-text")[0].innerText = base_price;
+    } else {
+        alert(milk_price[0].innerText);
+        milk_price = milk_price[0].innerText.replace('+$', ''); // remove +$ characters from string
+        base_price = base_price.replace('$', '');
+        modal_div.getElementsByClassName("base-price-text")[0].innerText = '$' + parseFloat(parseFloat(base_price) + parseFloat(milk_price)).toFixed(2);
+    }
+}
+*/
