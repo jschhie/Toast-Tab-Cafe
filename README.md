@@ -29,7 +29,7 @@
   * [x] toppings: max 3 options
 * cart
   * [x] total price for a single drink: base price + milk type + toppings 
-    * [ ] Drink Modal:: Add to Cart Button: update label with total price
+    * [x] Drink Modal:: Add to Cart Button: update label with total price
   * [ ] total price for entire order 
   * [x] add a single drink to cart
   * [ ] edit item
