@@ -132,8 +132,12 @@ Sunright Cafe | Home
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-dark" onclick="addToCart(this)">
+                        <div class="update-qty-div">
+                            <button type="button" class="btn btn-outline-dark update-qty-btn reduce-qty-btn" disabled onclick="reduceDrinkQty(this)">-</button>
+                            <span class="quantity-label">1</span>
+                            <button type="button" class="btn btn-outline-dark update-qty-btn increase-qty-btn" onclick="increaseDrinkQty(this)">+</button>
+                        </div>
+                        <button type="button" class="btn btn-dark add-to-cart-btn" onclick="addToCart(this)">
                             <span class="add-to-cart-text">Add to Cart</span>
                             <span class="custom-price-text">{{drink.price}}</span>
 

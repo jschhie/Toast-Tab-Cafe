@@ -79,6 +79,9 @@ function addToCart(btn) {
         let modal_footer_div = btn.parentElement; // footer div
         let custom_drink_price = modal_footer_div.getElementsByClassName("custom-price-text")[0].innerText;
 
+        // Get quantity
+        let quantity = modal_footer_div.getElementsByClassName("quantity-label")[0].innerText;
+
         // Add customized drink to cart
         let cart_div = document.getElementById("cart-div");
         let cart_row = document.createElement('div');
@@ -87,7 +90,7 @@ function addToCart(btn) {
         var cart_row_contents = `
         <div class="cart-row row">
         
-        <span class="col cart-col cart-item-quantity">$TODO_QTY</span>
+        <span class="col cart-col cart-item-quantity">${quantity}</span>
 
         <div class="col cart-col">
             <div class="cart-item-title">${drink_name}</div>
@@ -274,4 +277,40 @@ function addToppingPrices(btn) {
     let milk_price = modal_content_div.getElementsByClassName("milk-type-price")[0].innerText;
     let base_price = modal_content_div.getElementsByClassName("hidden")[0].innerText.substr(1); // omit '$' character
     modal_content_div.getElementsByClassName("custom-price-text")[0].innerText = '$' + parseFloat(parseFloat(added_toppings_price) + parseFloat(base_price) + parseFloat(milk_price)).toFixed(2);
+}
+
+
+function increaseDrinkQty(btn) {
+    let quantity_label = btn.parentElement.getElementsByClassName("quantity-label")[0];
+    
+    // Set max == 10 
+    if (parseInt(quantity_label.innerText) < 10) {
+        quantity_label.innerText = parseInt(quantity_label.innerText) + 1;
+    } else {
+        btn.disabled = true;
+    }
+    
+    let reduce_qty_btn = btn.parentElement.getElementsByClassName("reduce-qty-btn")[0];
+    // Conditionally enable button for reduceDrinkQty()
+    if (parseInt(quantity_label.innerText) > 1) {
+        reduce_qty_btn.disabled = false;
+    } else {
+        // Qty == 1: disable button for reduceDrinkQty()
+        reduce_qty_btn.disabled = true;
+    }
+}
+
+
+function reduceDrinkQty(btn) {
+    let quantity_label = btn.parentElement.getElementsByClassName("quantity-label")[0];
+    let increase_qty_btn = btn.parentElement.getElementsByClassName("increase-qty-btn")[0];
+    increase_qty_btn.disabled = false;
+
+    // Conditionally disable button for reduceDrinkQty() 
+    if (parseInt(quantity_label.innerText) == 1) {
+        reduce_qty_btn.disabled = true;
+    } else {
+        quantity_label.innerText = parseInt(quantity_label.innerText) - 1;
+        reduce_qty_btn.disabled = false;
+    }
 }

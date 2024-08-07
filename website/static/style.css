@@ -79,13 +79,28 @@ body {
     border-top: 1px solid black;
 }
 
+/*
+.cart-row:last-child {
+    border-bottom: 1px solid black;
+}*/
+
 .add-to-cart-text {
     text-align: left;
 }
 
-.base-price-text {
+.base-price-text, .custom-price-text {
     text-align: right;
     margin-left: 70px;
+}
+
+.update-qty-div {
+    /*margin-right: 20%;*/
+    position: absolute;
+    left: 10px;
+}
+
+.quantity-label {
+    padding: 10px;
 }
 
 @media all and (min-width:768px) {
