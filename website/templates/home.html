@@ -103,7 +103,7 @@ Sunright Cafe | Home
                             <br>
                             
                             {% for milk_type in milk_types %}
-                            <input type="radio" class="btn-check milk-radio" name="milk_options" id={{ milk_type.name + "_" + drink.id|string }} autocomplete="off" onchange="updateTextColor(this); updateModalPrice(this);">
+                            <input type="radio" class="btn-check milk-radio" name="milk_options" id={{ milk_type.name + "_" + drink.id|string }} autocomplete="off" onchange="updateTextColor(this); addMilkPrice(this);">
                             <label class="btn btn-outline-dark custom-btn" for={{ milk_type.name + "_" + drink.id|string }}>
                                 <span class="milk_type_label">{{milk_type.name}} milk</span>
                                 {% if milk_type.price != "$0.00" %}
@@ -122,7 +122,7 @@ Sunright Cafe | Home
                             <br>
                                 {% for topping in toppings %}
                                 <!-- note: some topping.name(s) have a whitespace: grass jelly, etc -->
-                                <input type="checkbox" class="btn-check topping-checkbox" name="toppings_options" id={{ topping.name.replace(" ", "_") + "_" + drink.id|string }} autocomplete="off" onchange="chooseToppings(this)">
+                                <input type="checkbox" class="btn-check topping-checkbox" name="toppings_options" id={{ topping.name.replace(" ", "_") + "_" + drink.id|string }} autocomplete="off" onchange="chooseToppings(this); addToppingPrices(this);">
                                 <label class="btn btn-outline-dark custom-btn" for={{ topping.name.replace(" ", "_") + "_" + drink.id|string }}>
                                     <span class="custom_topping_name">{{topping.name}}</span>
                                     <span class="custom_price_label">+{{topping.price}}</span>
@@ -135,8 +135,12 @@ Sunright Cafe | Home
                         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-dark" onclick="addToCart(this)">
                             <span class="add-to-cart-text">Add to Cart</span>
-                            <span class="base-price-text">{{drink.price}}</span>
+                            <span class="custom-price-text">{{drink.price}}</span>
+
+                            <!-- hidden, saved prices for base drink, milk type, and toppings -->
                             <span class="base-price-text hidden">{{drink.price}}</span>
+                            <span class="milk-type-price hidden">0.00</span>
+                            <span class="total-toppings-price hidden">0.00</span>
                         </button>
                     </div>
                 </div>

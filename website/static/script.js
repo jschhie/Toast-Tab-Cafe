@@ -47,10 +47,6 @@ function updateTextColor(btn) {
 
 /* === ADD TO CART === */
 function addToCart(btn) {
-    // Get base price of drink
-    let modal_footer_div = btn.parentElement; // footer div
-    let base_price = modal_footer_div.getElementsByClassName("hidden")[0].innerText.substr(1); // omit '$' character
-
     let modal_body_div = btn.parentElement.parentElement;
 
     // Get customized sweetness, ice level, milk type, and/or toppings 
@@ -79,18 +75,12 @@ function addToCart(btn) {
     if (flag) {
         return;
     } else {
-        // Calculate total price: base drink + milk type + toppings
-        let custom_drink_price = parseFloat(parseFloat(base_price) + parseFloat(milk_price)).toFixed(2);
-        let toppings_prices = Object.values(selected_toppings);
-        for (let i=0; i < toppings_prices.length; i++) {
-            // omit '+$' characters from each string when adding each
-            custom_drink_price = parseFloat(parseFloat(custom_drink_price) + parseFloat(toppings_prices[i].substr(2, ))).toFixed(2); // round to 2 decimal places
-        }
+        // Get custom drink price: base price + milk type + toppings
+        let modal_footer_div = btn.parentElement; // footer div
+        let custom_drink_price = modal_footer_div.getElementsByClassName("custom-price-text")[0].innerText;
 
         // Add customized drink to cart
         let cart_div = document.getElementById("cart-div");
-        //let drink_name = modal_body_div.getElementsByClassName("modal-title")[0].innerText;
-
         let cart_row = document.createElement('div');
         cart_row.classList.add('cart-row');
         
@@ -115,7 +105,7 @@ function addToCart(btn) {
 
             </ul>
         </div>
-        <span class="col cart-col cart-item-price">$${custom_drink_price}</span>
+        <span class="col cart-col cart-item-price">${custom_drink_price}</span>
     `;
         cart_row.innerHTML = cart_row_contents;
         cart_div.append(cart_row);
@@ -248,7 +238,40 @@ function hasMissingReqs(sugar_lvl, ice_lvl, milk_type, sugar_lvl_div, ice_lvl_di
 
 
 
-/* === UPDATE MODAL PRICE === */
-function updateModalPrice(btn) {
-    alert('todo: update modal price: for milk type and toppings');
+/* === UPDATE MODAL PRICE: MILK TYPE AND TOPPINGS === */
+function addMilkPrice(btn) {
+    let milk_type_div = btn.parentElement;
+    let [_, milk_price] = getMilkType(milk_type_div);
+    
+    // overwrite current milk price
+    let modal_content_div = btn.parentElement.parentElement.parentElement;
+    modal_content_div.getElementsByClassName("milk-type-price")[0].innerText = milk_price;
+
+    // calculate new custom drink price
+    let base_price = modal_content_div.getElementsByClassName("hidden")[0].innerText.substr(1); // omit '$' character
+    let added_toppings_price = modal_content_div.getElementsByClassName("total-toppings-price")[0].innerText;
+    modal_content_div.getElementsByClassName("custom-price-text")[0].innerText = '$' + parseFloat(parseFloat(added_toppings_price) + parseFloat(base_price) + parseFloat(milk_price)).toFixed(2);
+}
+
+
+
+function addToppingPrices(btn) {
+    let toppings_div = btn.parentElement;
+    let selected_toppings = getToppings(toppings_div);
+
+    let added_toppings_price = '0.00';
+    let toppings_prices = Object.values(selected_toppings);
+    for (let i=0; i < toppings_prices.length; i++) {
+        // omit '+$' characters from each string when adding each
+        added_toppings_price = parseFloat(parseFloat(added_toppings_price) + parseFloat(toppings_prices[i].substr(2, ))).toFixed(2); // round to 2 decimal places
+    }    
+
+    // overwrite current toppings price
+    let modal_content_div = btn.parentElement.parentElement.parentElement;
+    modal_content_div.getElementsByClassName("total-toppings-price")[0].innerText = added_toppings_price;
+
+    // calculate new custom drink price
+    let milk_price = modal_content_div.getElementsByClassName("milk-type-price")[0].innerText;
+    let base_price = modal_content_div.getElementsByClassName("hidden")[0].innerText.substr(1); // omit '$' character
+    modal_content_div.getElementsByClassName("custom-price-text")[0].innerText = '$' + parseFloat(parseFloat(added_toppings_price) + parseFloat(base_price) + parseFloat(milk_price)).toFixed(2);
 }
