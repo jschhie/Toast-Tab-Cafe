@@ -13,14 +13,14 @@
 
 ### Customize Drink 
 > Required: sweetness, ice level, and milk type
-<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/custom-drink-1.png">
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/modal-price.png">
 
 > Optional: toppings (max == 3)
-<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/custom-drink-2.png">
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/modal-price-2.png">
 
 ### Cart 
 > (work in progress)
-<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/cart-draft.png">
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/new-cart-draft.png">
 
 ## todo's
 * nav bar for menu
