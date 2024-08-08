@@ -81,6 +81,9 @@ function addToCart(btn) {
         // Get quantity
         let quantity = modal_footer_div.getElementsByClassName("quantity-label")[0].innerText;
 
+        // Get drink modal/id: Edit cart functionality
+        let drink_modal_id = modal_body_div.parentElement.parentElement.id;
+
         // Add customized drink to cart
         let all_cart_items_div = document.getElementById("all-cart-items");
         let cart_row = document.createElement('div');
@@ -104,7 +107,7 @@ function addToCart(btn) {
                     }).join("")}
                 </ul>
                 <div class="cart-actions">
-                    <button type="button" class="btn cart-action-link" onclick="editCartItem(this)">Edit</button>
+                    <button type="button" class="btn cart-action-link" data-bs-toggle="modal" data-bs-target=${"#" + drink_modal_id} onclick="removeCartItem(this)">Edit</button>
                     <button type="button" class="btn cart-action-link" onclick="removeCartItem(this)">Remove</button>
                 </div>
             </div>
@@ -115,6 +118,9 @@ function addToCart(btn) {
 
         // Update total price of cart items
         calcTotalPrice(all_cart_items_div);
+
+        // Hide empty cart message
+        document.getElementById("empty-cart-msg").style.display = "none";
     }
 }
 
@@ -341,14 +347,25 @@ function calcTotalPrice(all_cart_items_div) {
 
 
 
-/* === EDIT CART ITEM === */
-function editCartItem(btn) {
-    alert('edit cart item');
-}
-
-
-
 /* === REMOVE CART ITEM === */
 function removeCartItem(btn) {
-    alert('remove cart item');
+    let row_div = btn.parentElement.parentElement.parentElement;
+    // subtract cart row price from total price
+    let custom_price = row_div.getElementsByClassName("cart-item-price")[0].innerText.substr(1); // omit '$' character
+    let quantity = row_div.getElementsByClassName("cart-item-quantity")[0].innerText;
+    let cart_row_price = parseFloat(parseInt(quantity) * parseFloat(custom_price)).toFixed(2);
+
+    // overwrite new total cart price
+    let total_cart_price = document.getElementById("cart-total-price-label").innerText.substr(1); // omit '$' character
+    total_cart_price = parseFloat(parseFloat(total_cart_price) - parseFloat(cart_row_price)).toFixed(2);
+    document.getElementById("cart-total-price-label").innerText = '$' + total_cart_price;
+
+    // remove entire cart row
+    row_div.style.display = "none";
+    row_div.remove(); // delete from document
+
+    // if empty cart, display message
+    if (document.getElementById("cart-total-price-label").innerText == "$0.00") {
+        document.getElementById("empty-cart-msg").style.display = "block";
+    }
 }
