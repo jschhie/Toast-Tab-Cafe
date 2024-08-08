@@ -32,10 +32,11 @@
     * [x] Drink Modal:: Add to Cart Button: update label with total price
   * [x] total price for entire order 
   * [x] add a single drink to cart
-  * [ ] edit item/customizations
-  * [ ] remove item
+  * [x] edit item
+    * [ ] check if user cancels / discards edits: display original customizations
+  * [x] remove item
   * [x] multiply item: min = 1, max = 10
-  * [ ] check if "cart is empty!"  
+  * [x] check if "cart is empty!"  
 * checkout page
 * receipt page
 * (relational) database updates
