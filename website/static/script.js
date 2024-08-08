@@ -70,7 +70,6 @@ function addToCart(btn) {
     }
     
     // Check if Customer filled out required input for sweetness, ice lvl, and milk type
-    // and color code any missing reqs (in red)
     let flag = hasMissingReqs(sugar_lvl, ice_lvl, milk_type, sugar_lvl_div, ice_lvl_div, milk_type_div);
     if (flag) {
         return;
@@ -83,35 +82,39 @@ function addToCart(btn) {
         let quantity = modal_footer_div.getElementsByClassName("quantity-label")[0].innerText;
 
         // Add customized drink to cart
-        let cart_div = document.getElementById("cart-div");
+        let all_cart_items_div = document.getElementById("all-cart-items");
         let cart_row = document.createElement('div');
         cart_row.classList.add('cart-row');
         
         var cart_row_contents = `
-        <div class="cart-row row">
-        
-        <span class="col cart-col cart-item-quantity">${quantity}</span>
+            <div class="cart-col cart-item-quantity">${quantity}</div>
+            
+            <div class="cart-col">
+                <div class="cart-item-title">${drink_name}</div>
+                <ul class="cart-item-list">
+                    <li class="cart-item-details">${sugar_lvl}</li>
+                    <li class="cart-item-details">${ice_lvl}</li>
+                    
+                    <!-- Check if milk type == 'None' (aka drink.tag == 'fruit') -->
+                    ${ milk_type == 'None' ? "" : "<li class='cart-item-details'>" + milk_type + "</li>" }
+                    
+                    <!-- Separate newline for each topping -->
+                    ${Object.keys(selected_toppings).map(function (key) {
+                        return "<li class='cart-item-details'>" + key + "</li>"
+                    }).join("")}
+                </ul>
+                <div class="cart-actions">
+                    <button type="button" class="btn cart-action-link" onclick="editCartItem(this)">Edit</button>
+                    <button type="button" class="btn cart-action-link" onclick="removeCartItem(this)">Remove</button>
+                </div>
+            </div>
+            <div class="cart-col cart-item-price">${custom_drink_price}</div>`;
 
-        <div class="col cart-col">
-            <div class="cart-item-title">${drink_name}</div>
-            <ul>
-                <li class="cart-item-details">${sugar_lvl}</li>
-                <li class="cart-item-details">${ice_lvl}</li>
-                
-                <!-- Check if milk type == 'None' (aka drink.tag == 'fruit') -->
-                ${ milk_type == 'None' ? "<!-- Milk Type is None: Display Nothing -->" : "<li class='cart-item-details'>" + milk_type + "</li>" }
-                
-                <!-- Separate newline for each topping -->
-                ${Object.keys(selected_toppings).map(function (key) {
-                    return "<li class='cart-item-details'>" + key + "</li>"
-                }).join("")}
-
-            </ul>
-        </div>
-        <span class="col cart-col cart-item-price">${custom_drink_price}</span>
-    `;
         cart_row.innerHTML = cart_row_contents;
-        cart_div.append(cart_row);
+        all_cart_items_div.append(cart_row);
+
+        // Update total price of cart items
+        calcTotalPrice(all_cart_items_div);
     }
 }
 
@@ -241,7 +244,7 @@ function hasMissingReqs(sugar_lvl, ice_lvl, milk_type, sugar_lvl_div, ice_lvl_di
 
 
 
-/* === UPDATE MODAL PRICE: MILK TYPE AND TOPPINGS === */
+/* === UPDATE MODAL PRICE: MILK TYPE === */
 function addMilkPrice(btn) {
     let milk_type_div = btn.parentElement;
     let [_, milk_price] = getMilkType(milk_type_div);
@@ -257,7 +260,7 @@ function addMilkPrice(btn) {
 }
 
 
-
+/* === UPDATE MODAL PRICE: TOPPINGS === */
 function addToppingPrices(btn) {
     let toppings_div = btn.parentElement;
     let selected_toppings = getToppings(toppings_div);
@@ -280,6 +283,8 @@ function addToppingPrices(btn) {
 }
 
 
+
+/* === INCREASE DRINK QTY === */
 function increaseDrinkQty(btn) {
     let quantity_label = btn.parentElement.getElementsByClassName("quantity-label")[0];
     
@@ -301,6 +306,8 @@ function increaseDrinkQty(btn) {
 }
 
 
+
+/* === REDUCE DRINK QTY === */
 function reduceDrinkQty(btn) {
     let quantity_label = btn.parentElement.getElementsByClassName("quantity-label")[0];
     let increase_qty_btn = btn.parentElement.getElementsByClassName("increase-qty-btn")[0];
@@ -313,4 +320,35 @@ function reduceDrinkQty(btn) {
         quantity_label.innerText = parseInt(quantity_label.innerText) - 1;
         reduce_qty_btn.disabled = false;
     }
+}
+
+
+
+/* === CALCULATE TOTAL CART PRICE === */
+function calcTotalPrice(all_cart_items_div) {
+    let total_cart_price = '0.00';
+    let all_cart_rows = all_cart_items_div.getElementsByClassName("cart-row");
+    for (let i = 0; i < all_cart_rows.length; i++) {
+        let cart_row = all_cart_rows[i];
+        let quantity = cart_row.getElementsByClassName("cart-item-quantity")[0].innerText;
+        let custom_price = cart_row.getElementsByClassName("cart-item-price")[0].innerText.substr(1); // omit '$' character
+        let cart_row_price = parseFloat(parseInt(quantity) * parseFloat(custom_price)).toFixed(2);
+        total_cart_price = parseFloat(parseFloat(total_cart_price) + parseFloat(cart_row_price)).toFixed(2);
+    }
+    // overwrite new total cart price
+    document.getElementById("cart-total-price-label").innerText = '$' + total_cart_price;
+}
+
+
+
+/* === EDIT CART ITEM === */
+function editCartItem(btn) {
+    alert('edit cart item');
+}
+
+
+
+/* === REMOVE CART ITEM === */
+function removeCartItem(btn) {
+    alert('remove cart item');
 }
