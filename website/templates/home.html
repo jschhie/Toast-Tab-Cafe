@@ -157,13 +157,20 @@ Sunright Cafe | Home
     {% endfor %}
 
     <div id="cart-div">
-        <h2>Cart</h2>
-        <div class="cart-header row">
+        <h2>Your Order</h2>
+        <div class="cart-header">
+            <div class="cart-header-col cart-item-quantity">Quantity</div>
+            <div class="cart-header-col cart-item-title">Item</div>
+            <div class="cart-header-col cart-item-price">Price</div> 
+        </div>
 
-            <span class="col cart-col cart-item-quantity">Quantity</span>
-            <span class="col cart-col cart-item-title">Item</span>
-            <span class="col cart-col cart-item-price">Price</span> 
+        <div id="all-cart-items">
+            <!-- add cart items dynamically here -->
+        </div>
 
+        <div id="cart-total-div">
+            <span id="cart-total-label">TOTAL: </span>
+            <span id="cart-total-price-label">$0.00</span>
         </div>
     </div>
         

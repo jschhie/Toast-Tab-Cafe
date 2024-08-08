@@ -20,7 +20,7 @@
 
 ### Cart 
 > (work in progress)
-<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/cart-draft-qty-btn.png">
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/cart-total-and-actions.png">
 
 ## todo's
 * nav bar for menu
@@ -30,11 +30,12 @@
 * cart
   * [x] total price for a single drink: base price + milk type + toppings 
     * [x] Drink Modal:: Add to Cart Button: update label with total price
-  * [ ] total price for entire order 
+  * [x] total price for entire order 
   * [x] add a single drink to cart
   * [ ] edit item/customizations
   * [ ] remove item
   * [x] multiply item: min = 1, max = 10
+  * [ ] check if "cart is empty!"  
 * checkout page
 * receipt page
 * (relational) database updates
