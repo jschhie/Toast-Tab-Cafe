@@ -49,6 +49,13 @@ def create_database(app):
                             "$6.00",
                             "$5.50"]
             
+            drink_thumbnail_urls = ["https://live.staticflickr.com/65535/53913164349_95672ab926_o.png",
+                                    "https://live.staticflickr.com/65535/53913257610_eba4cb8607_o.png",
+                                    "https://live.staticflickr.com/65535/53913257605_f5afb6fcaf_o.png",
+                                    "https://live.staticflickr.com/65535/53911926957_9c83e77b23_o.png",
+                                    "https://live.staticflickr.com/65535/53913164409_252825eafc_o.png",
+                                    "https://live.staticflickr.com/65535/53913257685_c0d70ebcc7_o.png"]
+
             drink_img_urls = ["https://live.staticflickr.com/65535/53895278327_bef733e6a8_o.png",
                               "https://live.staticflickr.com/65535/53896197936_71b9ec7ddc_o.png",
                               "https://live.staticflickr.com/65535/53896620645_3487cee785_o.png",
@@ -56,12 +63,12 @@ def create_database(app):
                               "https://live.staticflickr.com/65535/53895278337_1957dc54b1_o.png",
                               "https://live.staticflickr.com/65535/53896620635_5d8029006a_o.png"]
             
-            drink_desc = ["jasmine green tea with signature house milk",
-                          "#1 customer favorite with black tea",
-                          "four seasons tea with fresh fruit",
-                          "jasmine green tea topped with a layer of freshly made sea-salt cheese foam",
-                          "premium matcha imported from Japan combined with four seasons tea",
-                          "try a Sunright twist on a classic Hong Kong dessert!"]
+            drink_desc = ["Jasmine green tea combined with our signature house milk",
+                          "#1 customer favorite. We expertly brew Ceylon black tea then perfectly blend in our signature house milk, drizzle in freshly made brown sugar syrup and top it off with a scoop of our deliciously chewy brown sugar boba.",
+                          "Our signature fruit tea is made with four seasons tea, freshly squeezed orange juice, passionfruit and served with lemon orange slices",
+                          "Jasmine green tea topped with a layer of freshly made sea-salt cheese foam",
+                          "Premium matcha imported from Japan combined with our four seasons tea and signature house milk",
+                          "Try a Sunright twist on a classic Hong Kong dessert! We took our fan favorite Hokkaido frostie, known for its creamy butterscotch flavor and layered it with our sweetened red beans to recreate this nostalgic sweet treat."]
         
             drink_tags = ["milk tea", 
                           "milk tea", 
@@ -70,8 +77,8 @@ def create_database(app):
                           "milk tea", 
                           "frosty"]
 
-            for name, price, img_url, desc, tag in zip(drink_names, drink_prices, drink_img_urls, drink_desc, drink_tags):
-                new_drink = Drink(name=name, price=price, img_url=img_url, desc=desc, tag=tag)
+            for name, price, img_url, thumbnail_url, desc, tag in zip(drink_names, drink_prices, drink_img_urls, drink_thumbnail_urls, drink_desc, drink_tags):
+                new_drink = Drink(name=name, price=price, img_url=img_url, thumbnail_url=thumbnail_url, desc=desc, tag=tag)
                 db.session.add(new_drink)
                 db.session.commit()
 

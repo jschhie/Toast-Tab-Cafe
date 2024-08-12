@@ -84,8 +84,13 @@ function addToCart(btn) {
         // Get drink modal/id: Edit cart functionality
         let drink_modal_id = modal_body_div.parentElement.parentElement.id;
 
-        // Add customized drink to cart
+        // Check if updating existing cart row, or adding new drink to cart
         let all_cart_items_div = document.getElementById("all-cart-items");
+        let all_cart_rows = all_cart_items_div.getElementsByClassName("cart-row");
+        //let curr_cart_row_index = all_cart_rows.length;
+        //let modal_btn_label = modal_footer_div.getElementsByClassName("add-to-cart-text")[0].innerText;
+
+        // Add customized drink to cart
         let cart_row = document.createElement('div');
         cart_row.classList.add('cart-row');
         
@@ -107,8 +112,9 @@ function addToCart(btn) {
                     }).join("")}
                 </ul>
                 <div class="cart-actions">
-                    <button type="button" class="btn cart-action-link" data-bs-toggle="modal" data-bs-target=${"#" + drink_modal_id} onclick="removeCartItem(this)">Edit</button>
+                    <button type="button" class="btn cart-action-link" data-bs-toggle="modal" data-bs-target=${"#" + drink_modal_id} onclick="editCartItem(this)">Edit</button>
                     <button type="button" class="btn cart-action-link" onclick="removeCartItem(this)">Remove</button>
+                    <span class="hidden drink-modal-id-span">${drink_modal_id}</span>
                 </div>
             </div>
             <div class="cart-col cart-item-price">${custom_drink_price}</div>`;
@@ -119,8 +125,10 @@ function addToCart(btn) {
         // Update total price of cart items
         calcTotalPrice(all_cart_items_div);
 
-        // Hide empty cart message
+        // Hide empty cart message & display checkout button
         document.getElementById("empty-cart-msg").style.display = "none";
+        document.getElementById("cart-total-div").style.display = "block";
+    
     }
 }
 
@@ -336,13 +344,30 @@ function calcTotalPrice(all_cart_items_div) {
     let all_cart_rows = all_cart_items_div.getElementsByClassName("cart-row");
     for (let i = 0; i < all_cart_rows.length; i++) {
         let cart_row = all_cart_rows[i];
-        let quantity = cart_row.getElementsByClassName("cart-item-quantity")[0].innerText;
-        let custom_price = cart_row.getElementsByClassName("cart-item-price")[0].innerText.substr(1); // omit '$' character
+        //let quantity = cart_row.getElementsByClassName("cart-item-quantity")[0].innerText;
+        let quantity = cart_row.getElementsByClassName("cart-item-quantity")[0].innerHTML;
+        //let custom_price = cart_row.getElementsByClassName("cart-item-price")[0].innerText.substr(1); // omit '$' character
+        let custom_price = cart_row.getElementsByClassName("cart-item-price")[0].innerHTML.substr(1); // omit '$' character
         let cart_row_price = parseFloat(parseInt(quantity) * parseFloat(custom_price)).toFixed(2);
         total_cart_price = parseFloat(parseFloat(total_cart_price) + parseFloat(cart_row_price)).toFixed(2);
     }
     // overwrite new total cart price
     document.getElementById("cart-total-price-label").innerText = '$' + total_cart_price;
+}
+
+
+
+/* === UPDATE CART ITEM === */
+function editCartItem(btn) {
+    let drink_modal_id = btn.nextElementSibling.nextElementSibling.innerText;
+    let drink_modal = document.getElementById(drink_modal_id);
+
+    // Change modal label from 'Add' to 'Update': acts a flag/indicator for addToCart()
+    let modal_btn_text = drink_modal.getElementsByClassName("add-to-cart-text")[0];
+    modal_btn_text.innerText = "Update Cart";
+
+    // todo: Conditionally remove original cart row, in case Customer cancels/discards edits
+    removeCartItem(btn);
 }
 
 
@@ -367,5 +392,15 @@ function removeCartItem(btn) {
     // if empty cart, display message
     if (document.getElementById("cart-total-price-label").innerText == "$0.00") {
         document.getElementById("empty-cart-msg").style.display = "block";
+        document.getElementById("cart-total-div").style.display = "none";
     }
+}
+
+
+
+/* === CHECKOUT CART === */
+function checkoutCart(btn) {
+    alert(btn);
+    // todo: check if empty cart
+    document.location.href = '/checkout';
 }

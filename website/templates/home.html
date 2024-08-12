@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% block title %} 
-Sunright Cafe | Home
+Sunright Cafe | Order Online
 {% endblock %}
 
 {% block content %} 
 <div>
-    <h1>Menu</h1>
+    <h2>Menu</h2>
 
     {% for tag, drinks in all_drinks.items() %}
-        <h2>{{tag}}</h2>
+        <h3>{{tag}}</h3>
         <div class="menu-container">
             {% for drink in drinks %}
             <!-- edit: replaced drink.name with drink.id for data-bs-target variable string -->
@@ -17,17 +17,17 @@ Sunright Cafe | Home
                 <div class="card-left">
                     <b class="drink-title">{{drink.name}}</b>
                     <br>
-                    <span class="desc-full">{{drink.desc}}</span>
+                    <span class="desc-large">{{drink.desc[0:65]}}...</span>
                     <span class="desc-small">
                         {{drink.desc[0:70]}}
                         {% if drink.desc|length > 70 %}
                         ...
                         {% endif %}
                     </span>
-                    <span class="desc-medium">{{drink.desc[0:20]}}...</span>                                        
+                    <span class="desc-medium">{{drink.desc[0:40]}}...</span>                                        
                     <div class="menu-price">{{drink.price}}</div>
                 </div>
-                <img class="card-right" src={{drink.img_url}}>
+                <img class="card-right" src={{drink.thumbnail_url}}>
             </button>
 
             <!-- Modal per drink -->
@@ -42,8 +42,9 @@ Sunright Cafe | Home
 
                     <div class="modal-body">
                         <img class="modal-img" src={{drink.img_url}} width="100%">
-
+                        
                         <h1 class="modal-title fs-5" id={{drink.name + "modal"}}>{{drink.name}}</h1>
+                        <br>
                         {{drink.desc}}
                         <hr>
 
@@ -156,25 +157,28 @@ Sunright Cafe | Home
         <br>
     {% endfor %}
 
+    <!--
     <div id="cart-div">
-        <h2>Your Order</h2>
+        <h3>Your Order</h3>
         <div class="cart-header">
             <div class="cart-header-col cart-item-quantity">Quantity</div>
             <div class="cart-header-col cart-item-title">Item</div>
             <div class="cart-header-col cart-item-price">Price</div> 
         </div>
 
-        <div id="all-cart-items">
-            <!-- add cart items dynamically here -->
-        </div>
+        <div id="all-cart-items"></div>
 
         <div id="empty-cart-msg">Add items to start your order.</div>
 
         <div id="cart-total-div">
-            <span id="cart-total-label">TOTAL: </span>
-            <span id="cart-total-price-label">$0.00</span>
+            <button class="btn btn-dark" id="cart-total-btn" type="button" onclick="checkoutCart(this)">
+                <span id="cart-total-label">Checkout</span>
+                <span id="cart-total-price-label">$0.00</span>
+            </button>
         </div>
     </div>
+    -->
+
         
 </div>
 

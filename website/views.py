@@ -23,3 +23,9 @@ def home():
     milk_types = MilkType.query.all()
 
     return render_template('home.html', all_drinks=all_drinks, toppings=toppings, milk_types=milk_types)
+
+
+
+@views.route('/checkout', methods=['POST', 'GET'])
+def checkout():
+    return render_template('checkout.html')
