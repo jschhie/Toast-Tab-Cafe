@@ -20,7 +20,7 @@
 
 ### Cart 
 > (work in progress)
-<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/updated-cart.png">
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/updated-cart-2.png">
 
 ## todo's
 * nav bar for menu
