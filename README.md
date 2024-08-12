@@ -9,22 +9,25 @@
 
 ### Cafe Menu
 > (work in progress)
-<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/new-menu.png">
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/updated-home.png">
 
 ### Customize Drink 
 > Required: sweetness, ice level, and milk type
-<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/qty-btn-1.png">
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/updated-menu-1.png">
 
 > Optional: toppings (max == 3)
-<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/qty-btn-2.png">
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/updated-menu-2.png">
 
 ### Cart 
 > (work in progress)
-<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/cart-total-and-actions.png">
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/updated-cart.png">
 
 ## todo's
 * nav bar for menu
+  * [x] offcanvas: cart button in navbar
+  * [ ] display, calc # (icon) of cart items
 * search bar for menu
+  * [ ] dropdown submenus for each drink category
 * menu modal
   * [x] toppings: max 3 options
 * cart
