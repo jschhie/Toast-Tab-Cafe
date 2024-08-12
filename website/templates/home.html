@@ -9,7 +9,7 @@ Sunright Cafe | Order Online
     <h2>Menu</h2>
 
     {% for tag, drinks in all_drinks.items() %}
-        <h3>{{tag}}</h3>
+        <h3 id={{tag|replace(" ","-") + "-section"}}>{{tag}}</h3>
         <div class="menu-container">
             {% for drink in drinks %}
             <!-- edit: replaced drink.name with drink.id for data-bs-target variable string -->

@@ -22,15 +22,19 @@
 
 /* === NAV BAR === */
 .navbar {
-    position: fixed;
-    top: 0;
+    padding-left: 50px;
+    padding-right: 50px;
     width: 100%;
     height: 70px;
     background-color: white;
-    z-index: 1; /* place navbar above menu-sub-div */
-    padding-left: 50px;
-    padding-right: 50px;
 }
+
+#main-navbar {
+    position: fixed;
+    top: 0;
+    z-index: 1; /* place navbar above menu-sub-div */
+}
+
 
 
 /* === BODY === */
@@ -40,7 +44,7 @@
 }
 
 .page-content {
-    margin-top: 100px;
+    margin-top: 60px;
 }
 
 .hidden {
