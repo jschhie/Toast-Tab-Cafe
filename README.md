@@ -5,6 +5,11 @@
 ## Overview
 * Responsive Flask web app that simulates Toast Tab's online ordering system for cafes
 
+
+## 🔖 Table of Contents
+* [Website Demo](https://github.com/jschhie/toast-tab-cafe/blob/main/README.md#website-demo)
+* [Running the Website Manually](https://github.com/jschhie/toast-tab-cafe/blob/main/README.md#running-the-site-manually)
+
 ## Website Demo
 
 ### Cafe Menu
@@ -15,18 +20,57 @@
 > Required: sweetness, ice level, and milk type
 <img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/updated-modal-1.png">
 
-> Optional: toppings (max 3)
+> Optional: toppings
 <img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/updated-modal-2.png">
 
 ### Cart 
 <img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/updated-cart-2.png">
 
+<hr>
+
+## Running the Site Manually
+To run this website manually (via your ```localhost```), download the required packages and this repository, as described below.
+
+The packages and libraries needed to run this website are listed in the ```requirements.txt``` file. 
+The following command will install all the required packages:
+
+```bash
+pip3 install -r requirements.txt
+```
+
+Next, to clone this repository, enter:
+```bash 
+git clone https://github.com/jschhie/toast-tab-cafe.git [folderNameHere]
+```
+
+Next, go into the folder: 
+
+```bash 
+cd [folderNameHere]
+```
+
+Finally, enter:
+
+```bash
+python3 main.py
+```
+
+The application will then automatically generate a ```cafe_database.db``` database, using SQLAlchemy, in the ```website``` directory.
+
+<hr>
+
+The user can then access and interact with the website at http://127.0.0.1:5000/ via any web browser. 
+
+
+<hr>
+
 ## todo's
 * nav bar for menu
   * [x] offcanvas: cart button in navbar
   * [ ] display, calc # (icon) of cart items
-* search bar for menu
-  * [x] dropdown submenus for each drink category
+* secondary nav bar: filter, search
+  * [x] dropdown filters for each drink category
+  * [ ] search bar
 * menu modal
   * [x] toppings: max 3 options
 * cart
