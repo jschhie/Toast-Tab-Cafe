@@ -3,7 +3,7 @@
 > Flask, Python,  SQLAlchemy, HTML, CSS, Bootstrap, JavaScript, Jinja
 
 ## Overview
-* Responsive Flask web app that simulates Toast Tab's online ordering system for cafes
+* Responsive Flask web app that simulates Toast Tab's online ordering system for cafes (work in progress)
 
 
 ## 🔖 Table of Contents
