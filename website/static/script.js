@@ -60,12 +60,12 @@ function addToCart(btn) {
     let ice_lvl = getIceLvl(ice_lvl_div);
     let selected_toppings = getToppings(toppings_div);
 
-    // Check if fruit type drink: No Milk Type required
-    let drink_name = modal_body_div.getElementsByClassName("modal-title")[0].innerText;
+    // Check if fruit type: No Milk Type required
+    let drink_tag = btn.parentElement.getElementsByClassName("hidden-modal-tag")[0].innerText;
     let milk_price = '0.00';
     let milk_type = "None";
 
-    if (drink_name.includes("fruit") == false) {
+    if (drink_tag !== "fruit") {
         [milk_type, milk_price] = getMilkType(milk_type_div);
     }
     
@@ -91,6 +91,7 @@ function addToCart(btn) {
         //let modal_btn_label = modal_footer_div.getElementsByClassName("add-to-cart-text")[0].innerText;
 
         // Add customized drink to cart
+        let drink_name = modal_body_div.getElementsByClassName("modal-title")[0].innerText;
         let cart_row = document.createElement('div');
         cart_row.classList.add('cart-row');
         
@@ -129,6 +130,13 @@ function addToCart(btn) {
         document.getElementById("empty-cart-msg").style.display = "none";
         document.getElementById("cart-total-div").style.display = "block";
     
+        // save current cart
+        let current_cart = document.getElementById("all-cart-items");
+        sessionStorage.setItem("current_cart", current_cart);
+
+        // save total price of cart
+        let current_cart_total = document.getElementById("cart-total-price-label").innerHTML;
+        sessionStorage.setItem("current_cart_total", current_cart_total);
     }
 }
 
@@ -366,6 +374,10 @@ function editCartItem(btn) {
     let modal_btn_text = drink_modal.getElementsByClassName("add-to-cart-text")[0];
     modal_btn_text.innerText = "Update Cart";
 
+    // save current cart before refreshing page with search results
+    var current_cart = document.getElementById("all-cart-items").innerHTML;
+    sessionStorage.setItem("current_cart", current_cart);
+
     // todo: Conditionally remove original cart row, in case Customer cancels/discards edits
     removeCartItem(btn);
 }
@@ -393,6 +405,14 @@ function removeCartItem(btn) {
     if (document.getElementById("cart-total-price-label").innerText == "$0.00") {
         document.getElementById("empty-cart-msg").style.display = "block";
         document.getElementById("cart-total-div").style.display = "none";
+    } else {
+        // save current cart 
+        var current_cart = document.getElementById("all-cart-items").innerHTML;
+        sessionStorage.setItem("current_cart", current_cart);
+
+        // save total price of cart
+        let current_cart_total = document.getElementById("cart-total-price-label").innerHTML;
+        sessionStorage.setItem("current_cart_total", current_cart_total);
     }
 }
 
@@ -400,7 +420,8 @@ function removeCartItem(btn) {
 
 /* === CHECKOUT CART === */
 function checkoutCart(btn) {
-    alert(btn);
-    // todo: check if empty cart
+    // save current cart before refreshing page with search results
+    var current_cart = document.getElementById("all-cart-items").innerHTML;
+    sessionStorage.setItem("current_cart", current_cart);
     document.location.href = '/checkout';
 }

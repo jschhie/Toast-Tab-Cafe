@@ -4,7 +4,39 @@
 Sunright Cafe | Order Online
 {% endblock %}
 
+{% block dropdown %}
+<!-- DROPDOWN SUBMENU WITH SEARCH & FILTER -->
+<nav id="dropdown-navbar" class="navbar navbar-expand-lg shadow">
+    <div id="dropdown-container" class="dropdown container-fluid">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Iced Drinks Menu
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#milk-tea-section">Milk Teas</a></li>
+            <li><a class="dropdown-item" href="#fruit-section">Fruit Series</a></li>
+            <li><a class="dropdown-item" href="#cheese-foam-section">Cheese Foam Series</a></li>
+            <li><a class="dropdown-item" href="#frosty-section">Frosties</a></li>
+        </ul>
+    </div>
+    <!-- SEARCH BAR -->
+    <form id="searchbar" method="post" class="d-flex" role="search">
+        <input id="user-query" name="user-query" class="form-control me-2" type="search" placeholder="Search..." aria-label="Search">
+        <button class="btn btn-dark" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+            </svg>
+        </button>
+    </form>
+</nav>
+{% endblock %}
+
 {% block content %} 
+<!-- save current cart -->
+ <script>
+    let current_cart = document.getElementById("all-cart-items").innerHTML;
+    sessionStorage.setItem("current_cart", current_cart);
+ </script>
+
 <div>
     <h2>Menu</h2>
 
@@ -12,10 +44,13 @@ Sunright Cafe | Order Online
         <h3 id={{tag|replace(" ","-") + "-section"}}>{{tag}}</h3>
         <div class="menu-container">
             {% for drink in drinks %}
-            <!-- edit: replaced drink.name with drink.id for data-bs-target variable string -->
             <button class="card menu-sub-div" data-bs-toggle="modal" data-bs-target={{ "#" + drink.id|string + "modal" }}>
                 <div class="card-left">
+                    {% if query_flag and drink in matching_drinks %}
+                    <b class="drink-title" style="background-color:yellow">{{drink.name}}</b>
+                    {% else %}
                     <b class="drink-title">{{drink.name}}</b>
+                    {% endif %}
                     <br>
                     <span class="desc-large">{{drink.desc[0:65]}}...</span>
                     <span class="desc-small">
@@ -31,18 +66,15 @@ Sunright Cafe | Order Online
             </button>
 
             <!-- Modal per drink -->
-            <!-- edit: changed drink.name to drink.id in id, aria-labelledby -->
             <div class="modal fade" id={{ drink.id|string + "modal" }} tabindex="-1" aria-labelledby={{ drink.id|string + "modal"}} aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
-
                     <div class="modal-header">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
                         <img class="modal-img" src={{drink.img_url}} width="100%">
-                        
                         <h1 class="modal-title fs-5" id={{drink.name + "modal"}}>{{drink.name}}</h1>
                         <br>
                         {{drink.desc}}
@@ -142,10 +174,11 @@ Sunright Cafe | Order Online
                             <span class="add-to-cart-text">Add to Cart</span>
                             <span class="custom-price-text">{{drink.price}}</span>
 
-                            <!-- hidden, saved prices for base drink, milk type, and toppings -->
+                            <!-- hidden, saved prices for base drink, milk type, toppings, and tag -->
                             <span class="base-price-text hidden">{{drink.price}}</span>
                             <span class="milk-type-price hidden">0.00</span>
                             <span class="total-toppings-price hidden">0.00</span>
+                            <span class="hidden-modal-tag hidden">{{drink.tag}}</span>
                         </button>
                     </div>
                 </div>
@@ -178,8 +211,5 @@ Sunright Cafe | Order Online
         </div>
     </div>
     -->
-
-        
 </div>
-
 {% endblock %}

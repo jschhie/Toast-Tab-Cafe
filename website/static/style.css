@@ -230,6 +230,15 @@
 
 
 
+/* === CHECKOUT, RECEIPT === */
+#receipt-total-div {
+    text-align: center;
+    font-size: x-large;
+    margin-top: 25px;
+}
+
+
+
 /* === RESPONSIVE MEDIA QUERIES === */
 @media all and (min-width:768px) {
     /* medium */

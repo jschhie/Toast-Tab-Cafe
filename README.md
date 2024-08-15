@@ -14,7 +14,7 @@
 
 ### Cafe Menu
 > (work in progress)
-<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/updated-home-1.png">
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/searchbar-1.png">
 
 ### Customize Drink 
 > Required: sweetness, ice level, and milk type
@@ -25,6 +25,9 @@
 
 ### Cart 
 <img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/updated-cart-2.png">
+
+### Receipt
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/receipt-1.png">
 
 <hr>
 
