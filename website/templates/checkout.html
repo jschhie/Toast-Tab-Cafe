@@ -1,14 +1,60 @@
 {% extends "base.html" %}
 
 {% block title %} 
-Sunright Cafe | Checkout Cart
+Sunright Cafe | Thank you
 {% endblock %}
 
 {% block content %} 
-<div>
-    <h1>Checkout</h1>
-    <h2>Sunright Cafe</h2>
+<div id="receipt-section">
+    <h1>Thanks for your order!</h1>
+    <span class="checkout-info">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket-fill" viewBox="0 0 16 16">
+            <path d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0z"/>
+        </svg>
+        Pickup
+    </span>
+    <br>
+    <span class="checkout-info">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-check" viewBox="0 0 16 16">
+            <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+        </svg>
+        ASAP (20 - 25 mins)
+    </span>
+    <br>
+    <span class="checkout-info">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+        </svg>
+        1230 Sunny Blvd., Sunnyvale, NY 17001
+    </span>
+    
     <hr>
-    <h3>Order Details</h3>
+
+    <h3>Order Summary</h3>
+    <div id="order-details">
+        <!-- Display current cart -->
+    </div>
+    <div id="receipt-total-div">
+        <b>Total: </b>
+        <span id="receipt-total-price">$0.00</span>
+    </div>
 </div>
+
+<script>
+    // Fetch and display cart
+    let current_cart = sessionStorage.getItem("current_cart");
+    document.getElementById("order-details").innerHTML = current_cart;
+    
+    // Fetch and display cart total price
+    let current_cart_price = sessionStorage.getItem("current_cart_total");
+    document.getElementById("receipt-total-price").innerHTML = current_cart_price;
+
+    // Remove edit, remove functionality from receipt
+    let cart_actions_rows = document.getElementsByClassName("cart-actions");
+    for (let i = 0; i < cart_actions_rows.length; i++) {
+        cart_actions_rows[i].style.display = "none";
+    }
+</script>
+
 {% endblock %}

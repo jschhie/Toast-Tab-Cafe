@@ -5,6 +5,8 @@ from .models import Drink, Topping, MilkType
 
 #from collections import defaultdict
 
+from sqlalchemy import select, or_
+
 views = Blueprint('views', __name__)
 
 
@@ -19,10 +21,21 @@ def home():
     all_drinks["frosty"] = Drink.query.filter(Drink.tag == "frosty")
 
     toppings = Topping.query.all()
-
     milk_types = MilkType.query.all()
 
-    return render_template('home.html', all_drinks=all_drinks, toppings=toppings, milk_types=milk_types)
+    # Searchbar feature
+    if request.method == 'POST':
+        user_query = request.form['user-query']
+        if (len(user_query)):
+            # Fetch matching drinks
+            matching_drinks = Drink.query.filter(or_(Drink.name.contains(user_query), Drink.tag.contains(user_query), Drink.desc.contains(user_query)))
+            if (matching_drinks.first()): 
+                # At least one matching drink
+                # todo: save current cart before refreshing
+                return render_template('home.html', all_drinks=all_drinks, toppings=toppings, milk_types=milk_types, matching_drinks=matching_drinks, query_flag=True)
+
+    # todo: save current cart before refreshing
+    return render_template('home.html', all_drinks=all_drinks, toppings=toppings, milk_types=milk_types, matching_drinks=None, query_flag=False)
 
 
 
