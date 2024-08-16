@@ -108,7 +108,7 @@
 }
 
 .card-left {
-    width: 70%;
+    width: 65%; /* mobile view first */
     position: absolute;
     left: 0;
     height: 90%;
