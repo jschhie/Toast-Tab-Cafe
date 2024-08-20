@@ -42,3 +42,10 @@ def home():
 @views.route('/checkout', methods=['POST', 'GET'])
 def checkout():
     return render_template('checkout.html')
+
+
+
+
+@views.route('/error')
+def page_not_found():
+    return render_template('error.html')

@@ -9,11 +9,18 @@ DB_NAME = "cafe_database.db"
 
 
 
+def page_not_found(e):
+    return render_template('error.html'), 404
+
+
+
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = '88285146618c47c6abc24603791d7dfd' # enable sessions and flashed messages
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    app.register_error_handler(404, page_not_found)
 
     db.init_app(app)
 
