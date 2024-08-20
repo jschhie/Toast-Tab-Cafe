@@ -93,7 +93,7 @@
     margin: 2%;
     text-align: left;
     box-shadow: 5px 5px 15px rgb(234, 234, 234);
-    transition: box-shadow 0.3s ease; 
+    transition: box-shadow 0.3s ease;
     z-index: 0;
 
 }
@@ -217,7 +217,7 @@
 }
 
 
-.cart-action-link {  
+.cart-action-link {
     margin-right: 10px;
     color: blue;
 }
@@ -278,7 +278,7 @@
     }
 
     #store-banner {
-        background-size: 320px; 
+        background-size: 320px;
     }
 
     #banner-address {
