@@ -1,5 +1,7 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import IntegrityError
+
 from os import path
 
 db = SQLAlchemy()
@@ -121,8 +123,11 @@ def create_database(app):
 
             for name, price, img_url, thumbnail_url, desc, tag in zip(drink_names, drink_prices, drink_img_urls, drink_thumbnail_urls, drink_desc, drink_tags):
                 new_drink = Drink(name=name, price=price, img_url=img_url, thumbnail_url=thumbnail_url, desc=desc, tag=tag)
-                db.session.add(new_drink)
-                db.session.commit()
+                try:
+                    db.session.add(new_drink)
+                    db.session.commit()
+                except IntegrityError:
+                    db.session.rollback() 
 
             ###### Insert toppings into database ######
             toppings_name = ["boba",
@@ -137,8 +142,11 @@ def create_database(app):
             
             for name, price in zip(toppings_name, toppings_prices):
                 new_topping = Topping(name=name, price=price)
-                db.session.add(new_topping)
-                db.session.commit()
+                try:
+                    db.session.add(new_topping)
+                    db.session.commit()
+                except IntegrityError:
+                    db.session.rollback()
 
             ###### Insert milk types into database ######
             milk_names = ["house",
@@ -153,5 +161,8 @@ def create_database(app):
             
             for name, price in zip(milk_names, milk_prices):
                 milk_type = MilkType(name=name, price=price)
-                db.session.add(milk_type)
-                db.session.commit()
+                try:
+                    db.session.add(milk_type)
+                    db.session.commit()
+                except IntegrityError:
+                    db.session.rollback()
