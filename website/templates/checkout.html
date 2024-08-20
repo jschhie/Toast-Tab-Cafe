@@ -5,6 +5,14 @@ Sunright Cafe | Thank you
 {% endblock %}
 
 {% block content %} 
+<script>
+    // Check if invalid checkout page
+    let curr_cart_price = sessionStorage.getItem("current_cart_total");
+    if (curr_cart_price == "$0.00") {
+        document.location.href = '/error';
+    }
+</script>
+
 <div id="receipt-section">
     <h1>Thanks for your order!</h1>
     <span class="checkout-info">
@@ -52,6 +60,12 @@ Sunright Cafe | Thank you
 
     // Remove edit, remove functionality from receipt
     let cart_actions_rows = document.getElementsByClassName("cart-actions");
+    
+    // Check if invalid checkout page
+    if (cart_actions_rows.length == 0) {
+        document.location.href = '/error';
+    }
+
     for (let i = 0; i < cart_actions_rows.length; i++) {
         cart_actions_rows[i].style.display = "none";
     }
