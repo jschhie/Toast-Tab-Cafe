@@ -3,13 +3,17 @@ from flask import Blueprint, render_template, request, redirect, flash
 from . import db
 from .models import Drink, Topping, MilkType
 
-#from collections import defaultdict
+#import datetime
 
 from sqlalchemy import select, or_
 
 views = Blueprint('views', __name__)
 
-
+'''
+day_of_week_map = {0: 'Mondays', 1: 'Tuesdays', 2: 'Wednesdays', 3: 'Thursdays', 4: 'Fridays', 5: 'Saturdays', 6: 'Sundays'}
+day_of_week_index = datetime.datetime.today().weekday() # where 0: Monday, ...  
+day_of_week = day_of_week_map[day_of_week_index]
+'''
 
 @views.route('/', methods=['POST', 'GET'])
 def home():

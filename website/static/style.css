@@ -230,6 +230,31 @@
 
 
 
+/* === FOOTER === */
+footer {
+    width: 100vw;
+    height: 330px;
+    background-color: black;
+    color: white;
+    padding: 5%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+
+#footer-title {
+    font-size: larger;
+}
+
+#biz-hours-link {
+    border: none;
+    text-decoration: underline;
+    color: white;
+}
+
+.biz-hour-row {
+    margin: 3%;
+}
+
 /* === CHECKOUT, RECEIPT === */
 #receipt-total-div {
     text-align: center;
@@ -242,6 +267,10 @@
 /* === RESPONSIVE MEDIA QUERIES === */
 @media all and (min-width:576px) {
     /* small */
+    footer {
+        padding: 8%;
+    }
+
     .desc-xsmall {
         display: none;
     }
@@ -255,6 +284,10 @@
 
 @media all and (min-width:768px) {
     /* medium */
+    footer {
+        padding: 5%;
+    }
+
     #dropdown-container {
         padding-bottom: 0px;
         border-bottom: none;
@@ -310,6 +343,10 @@
 
 @media all and (min-width:992px) {
     /* large, xlarge */
+    footer {
+        padding: 3%;
+    }
+
     #dropdown-container {
         width: 20%;
     }
