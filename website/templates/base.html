@@ -135,10 +135,14 @@
                         <br>
                         <div id="open-closed-status-modal"></div>
                         <br>
-                        {% for day in ['Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays', 'Sundays'] %}
-                        <div class="row biz-hour-row">
-                            <div class="col">{{day}}</div>
-                            <div class="col">11:45 AM - 9:00 PM</div>
+                        {% for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] %}
+                        <div class="row biz-hour-row" id={{day + "-row"}}>
+                            <div class="col">
+                                {{day}}
+                            </div>
+                            <div class="col">
+                                11:45 AM - 9:00 PM
+                            </div>
                         </div>
                         {% endfor %}
                         <script>
@@ -171,9 +175,13 @@
             // get day of week
             var day = new Date();
             var day_of_week_index = day.getDay();
-            var DOW_map = {0 : 'Sundays' , 1: 'Mondays', 2: 'Tuesdays', 3: 'Wednesdays', 4: 'Thursdays', 5: 'Fridays', 6: 'Saturdays'};
+
+            var DOW_map = {0 : 'Sunday' , 1: 'Monday', 2: 'Tuesday', 3: 'Wednesday', 4: 'Thursday', 5: 'Friday', 6: 'Saturday'};
             var day_of_week = DOW_map[day_of_week_index]; // string
-            
+
+            // Bold row for current biz hours
+            document.getElementById(day_of_week + "-row").style.fontWeight = 'bolder';
+
             // overwrite current day
             document.getElementById('curr-day').innerHTML = day_of_week;
             
