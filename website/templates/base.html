@@ -104,7 +104,7 @@
         </div>
         <br>
         <div id="footer-contact">
-            (123) 456-7890
+            <span style="color: white; text-decoration: none;">(123) 456-7890</span>
             <br>
             1230 Sunny Blvd., Sunnyvale, NY 17001
         </div>
@@ -131,10 +131,12 @@
                     </div>
 
                     <div class="modal-body" style="color: black">
-                        <h1 class="modal-title fs-5">Sunright Cafe, Sunnyvale</h1>
-                        <br>
-                        <div id="open-closed-status-modal"></div>
-                        <br>
+                        <div style="text-align: center;">
+                            <h1 class="modal-title fs-5">Sunright Cafe, Sunnyvale</h1>
+                            <br>
+                            <div id="open-closed-status-modal"></div>
+                            <br>
+                        </div>
                         {% for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] %}
                         <div class="row biz-hour-row" id={{day + "-row"}}>
                             <div class="col">
@@ -186,8 +188,8 @@
             var curr_min = day.getMinutes();
 
             // overwrite open/closed status and update indicator
-            if (time.includes('AM') && ((curr_hour < 11) || (curr_hour == 11 && curr_min < 45))) {
-                // Closed before 11:45 AM
+            if (time.includes('AM') && ((curr_hour == 12) || (curr_hour < 11) || (curr_hour == 11 && curr_min < 45))) {
+                // Closed before 11:45 AM & account for 12:00 AM
                 document.getElementById('store-status').style.fill = 'red';
                 document.getElementById('open-closed-status').innerHTML = 'Closed';
             } else if (time.includes('PM') && ((curr_hour > 9) || (curr_hour == 9 && curr_min >= 1))) {
