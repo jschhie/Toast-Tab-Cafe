@@ -192,8 +192,8 @@
                 // Closed before 11:45 AM & account for 12:00 AM
                 document.getElementById('store-status').style.fill = 'red';
                 document.getElementById('open-closed-status').innerHTML = 'Closed';
-            } else if (time.includes('PM') && ((curr_hour > 9) || (curr_hour == 9 && curr_min >= 1))) {
-                // Closed after 09:00 PM
+            } else if (time.includes('PM') && ((curr_hour >= 9 && curr_hour <= 11))) {
+                // Closed after 09:00 PM & account for 12:00 PM
                 document.getElementById('store-status').style.fill = 'red';
                 document.getElementById('open-closed-status').innerHTML = 'Closed';
             } else {
