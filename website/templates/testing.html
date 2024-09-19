@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %} 
+Sunright Cafe | Testing Database
+{% endblock %}
+
+{% block content %}
+<h1>orders</h1>
+{% if all_orders|length == 0 %}
+    <p>No orders currently!</p>
+{% else %}
+    <p>There are {{all_orders|length}} total orders.</p>
+    {% for order in all_orders %}
+        {{ order.id }}
+        <br>
+        {{ order.purchase_date }}
+        <br>
+        {{ order.total_price }}
+        <hr>
+    {% endfor %}
+{% endif %}
+
+<h1>custom drinks</h1>
+{% if all_custom_drinks|length == 0 %}
+    <p>No custom drinks</p>
+{% else %}
+    {% for custom_drink in all_custom_drinks %}
+        {{ custom_drink.id }}
+        <br>
+        {{ custom_drink.custom_price }}
+        <br>
+        {{ custom_drink.qty }}
+        <br>
+        {{ custom_drink.order_id }}
+        <br>
+        {{ custom_drink.drink_name }}
+        <br>
+        {{ custom_drink.sugar_lvl }}
+        <br>
+        {{ custom_drink.ice_lvl }}
+        <br>
+        {{ custom_drink.milk_type }}
+        <br>
+        {{ custom_drink.toppings }}
+        <hr>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}

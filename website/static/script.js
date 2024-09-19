@@ -87,8 +87,6 @@ function addToCart(btn) {
         // Check if updating existing cart row, or adding new drink to cart
         let all_cart_items_div = document.getElementById("all-cart-items");
         let all_cart_rows = all_cart_items_div.getElementsByClassName("cart-row");
-        //let curr_cart_row_index = all_cart_rows.length;
-        //let modal_btn_label = modal_footer_div.getElementsByClassName("add-to-cart-text")[0].innerText;
 
         // Add customized drink to cart
         let drink_name = modal_body_div.getElementsByClassName("modal-title")[0].innerText;
@@ -121,16 +119,16 @@ function addToCart(btn) {
             <div class="cart-col cart-item-price">${custom_drink_price}</div>`;
 
         cart_row.innerHTML = cart_row_contents;
-        all_cart_items_div.append(cart_row);
+        all_cart_items_div.append(cart_row);        
 
         // Update total price of cart items
-        calcTotalPrice(all_cart_items_div);
+        calcTotalPrice(all_cart_items_div, isCheckout=false);
 
         // Hide empty cart message & display checkout button
         document.getElementById("empty-cart-msg").style.display = "none";
         document.getElementById("cart-total-div").style.display = "block";
     
-        // save current cart
+        // save current_cart (all_cart_items_div) to later create CustomDrink objects after checkout()
         let current_cart = document.getElementById("all-cart-items");
         sessionStorage.setItem("current_cart", current_cart);
 
@@ -347,18 +345,60 @@ function reduceDrinkQty(btn) {
 
 
 /* === CALCULATE TOTAL CART PRICE === */
-function calcTotalPrice(all_cart_items_div) {
+function calcTotalPrice(all_cart_items_div, isCheckout) {
+    // copy cart row items to hidden input form field
+    let json_cart = []; // list of dictionaries per CustomDrink
+
     let total_cart_price = '0.00';
     let all_cart_rows = all_cart_items_div.getElementsByClassName("cart-row");
     for (let i = 0; i < all_cart_rows.length; i++) {
         let cart_row = all_cart_rows[i];
-        //let quantity = cart_row.getElementsByClassName("cart-item-quantity")[0].innerText;
+        // Calc total cart price = quantity * custom_price
         let quantity = cart_row.getElementsByClassName("cart-item-quantity")[0].innerHTML;
-        //let custom_price = cart_row.getElementsByClassName("cart-item-price")[0].innerText.substr(1); // omit '$' character
         let custom_price = cart_row.getElementsByClassName("cart-item-price")[0].innerHTML.substr(1); // omit '$' character
         let cart_row_price = parseFloat(parseInt(quantity) * parseFloat(custom_price)).toFixed(2);
         total_cart_price = parseFloat(parseFloat(total_cart_price) + parseFloat(cart_row_price)).toFixed(2);
+        // ======== TODO ========
+        // If isCheckout: create json row entry 
+        if (isCheckout) {
+            let drink_name = cart_row.getElementsByClassName("cart-item-title")[0].innerHTML;
+            
+            // Retrieve sugar lvl, ice lvl, and milk type
+            let cart_col = cart_row.getElementsByClassName("cart-col")[1]; // Get second column with cart-item-details
+            let cart_col_details = cart_col.getElementsByClassName("cart-item-details");
+            let sugar_lvl = cart_col_details[0].innerHTML;
+            let ice_lvl = cart_col_details[1].innerHTML;
+            let milk_type = cart_col_details[2].innerHTML;
+
+            let toppings = []; // list of strings (names of toppings)
+            if (cart_col_details.length > 3) {
+                // Optional toppings were chosen: Max == 3
+                for (let n = 0; n < cart_col_details.length; n++) {
+                    // Skip first 3: Reserved for sugar lvl, ice lvl, and milk type
+                    if (n >= 3) {
+                        let topping = cart_col_details[n].innerHTML;
+                        toppings.push(topping);
+                    }
+                }
+            }
+
+            let custom_drink_row = { "custom_price": '$' + custom_price, 
+                                    "qty": quantity, 
+                                    "drink_name": drink_name,
+                                    "sugar_lvl": sugar_lvl, 
+                                    "ice_lvl": ice_lvl,
+                                    "milk_type": milk_type,
+                                    "toppings": toppings
+                                    };
+            json_cart.push(custom_drink_row);
+        }
     }
+
+    if (isCheckout) {
+        // copy json cart info to hidden input form field
+        document.getElementById("cart-row-items-input").value = JSON.stringify(json_cart);   
+    }
+
     // overwrite new total cart price
     document.getElementById("cart-total-price-label").innerText = '$' + total_cart_price;
 }
@@ -421,7 +461,16 @@ function removeCartItem(btn) {
 /* === CHECKOUT CART === */
 function checkoutCart(btn) {
     // save current cart before refreshing page with search results
+    var all_cart_items_div = document.getElementById("all-cart-items");
     var current_cart = document.getElementById("all-cart-items").innerHTML;
     sessionStorage.setItem("current_cart", current_cart);
+
+    // copy cart total price to hidden input form field
+    var total_price_value = document.getElementById("cart-total-price-label").innerText;
+    document.getElementById("total-order-price-input").value = total_price_value;
+
+    // get and send json cart info when submitting form
+    calcTotalPrice(all_cart_items_div, isCheckout=true);
+
     document.location.href = '/checkout';
 }

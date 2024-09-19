@@ -29,6 +29,9 @@
 ### Receipt
 <img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/receipt-1.png">
 
+### Testing Database Orders and CustomDrinks
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/testing-db.png">
+
 <hr>
 
 ## Running the Site Manually
