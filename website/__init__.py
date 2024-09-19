@@ -30,7 +30,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
 
     # create or retrieve existing DB
-    from .models import Drink, Topping, MilkType
+    from .models import Drink, Topping, MilkType, Order, CustomDrink
     create_database(app)
 
     return app
@@ -40,7 +40,7 @@ def create_app():
 def create_database(app):
     if not path.exists('website/' + DB_NAME):
         with app.test_request_context():
-            from .models import Drink, Topping, MilkType
+            from .models import Drink, Topping, MilkType, Order, CustomDrink
             db.create_all(app=app)
 
             ###### Insert drinks into database ######

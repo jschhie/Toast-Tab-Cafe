@@ -55,34 +55,38 @@
     </header>
 
     <!-- OFFCANVAS CART -->
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvas-cart" aria-labelledby="offcanvas-cart-label">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvas-cart-label">Your Order</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <form method="post">
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvas-cart" aria-labelledby="offcanvas-cart-label">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvas-cart-label">Your Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+    
+            <div class="offcanvas-body" id="cart-div">
+                <div class="cart-header">
+                    <div class="cart-header-col cart-item-quantity">Quantity</div>
+                    <div class="cart-header-col cart-item-title">Item</div>
+                    <div class="cart-header-col cart-item-price">Price</div> 
+                </div>
+        
+                <div id="all-cart-items">
+                    <!-- ADD CART ROWS DYNAMICALLY HERE -->
+                </div>
+        
+                <div id="empty-cart-msg">Add items to start your order.</div>
+        
+                <div id="cart-total-div" class="hidden">
+                    <button class="btn btn-dark" id="cart-total-btn" type="button submit" name="action" value="checkout" onclick="checkoutCart(this)">
+                        <span id="cart-total-label">Checkout</span>
+                        <span id="cart-total-price-label">$0.00</span>
+                        <!-- send total order price in form -->
+                        <input class="hidden" id="total-order-price-input" name="total-order-price" placeholder="$0.00"/>
+                        <input class="hidden" id="cart-row-items-input" name="hidden-cart-row-items"/>
+                    </button>
+                </div>
+            </div>
         </div>
-
-        <div class="offcanvas-body" id="cart-div">
-            <div class="cart-header">
-                <div class="cart-header-col cart-item-quantity">Quantity</div>
-                <div class="cart-header-col cart-item-title">Item</div>
-                <div class="cart-header-col cart-item-price">Price</div> 
-            </div>
-    
-            <div id="all-cart-items">
-                <!-- ADD CART ROWS DYNAMICALLY HERE -->
-            </div>
-    
-            <div id="empty-cart-msg">Add items to start your order.</div>
-    
-            <div id="cart-total-div" class="hidden">
-                <button class="btn btn-dark" id="cart-total-btn" type="button" onclick="checkoutCart(this)">
-                    <span id="cart-total-label">Checkout</span>
-                    <span id="cart-total-price-label">$0.00</span>
-                </button>
-            </div>
-        </div>
-
-    </div>
+    </form>
 
     <body>
         <div class="body-container">
@@ -208,6 +212,7 @@
             var addToCartBtns = document.getElementsByClassName("add-to-cart-btn");
             var btnLabels = document.getElementsByClassName("add-to-cart-text");
 
+            /*
             if (status.includes("Open")) {
                 document.getElementById("open-closed-status-modal").innerHTML = `${indicator}` + ` Open now • Closes at 9 PM`;
                 // enable addToCart() feature
@@ -223,6 +228,7 @@
                     btnLabels[i].innerText = "(Store Closed)";
                 }
             }
+            */
 
         </script>
     </footer>
