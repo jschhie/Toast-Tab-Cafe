@@ -103,7 +103,7 @@ function addToCart(btn) {
                     <li class="cart-item-details">${ice_lvl}</li>
                     
                     <!-- Check if milk type == 'None' (aka drink.tag == 'fruit') -->
-                    ${ milk_type == 'None' ? "" : "<li class='cart-item-details'>" + milk_type + "</li>" }
+                    ${ milk_type == 'None' ? "<li class='hidden cart-item-details'>" + milk_type + "</li>" : "<li class='cart-item-details'>" + milk_type + "</li>" }
                     
                     <!-- Separate newline for each topping -->
                     ${Object.keys(selected_toppings).map(function (key) {
@@ -368,6 +368,8 @@ function calcTotalPrice(all_cart_items_div, isCheckout) {
             let cart_col_details = cart_col.getElementsByClassName("cart-item-details");
             let sugar_lvl = cart_col_details[0].innerHTML;
             let ice_lvl = cart_col_details[1].innerHTML;
+
+            // TODO: Account for fruit type tag: milk_type == "None"
             let milk_type = cart_col_details[2].innerHTML;
 
             let toppings = []; // list of strings (names of toppings)
