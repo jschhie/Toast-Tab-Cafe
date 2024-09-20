@@ -4,6 +4,7 @@
 
 ## Overview
 * Responsive online cafe ordering system using Flask and SQLite, implementing customizable drink options, search/filter features, and business hours restrictions
+* Features an intuitive, secure admin dashboard for managing cafe database
 * Hosted on PythonAnywhere; you may interact with the website at: https://sunrightcafe.pythonanywhere.com/
 
 ## 🔖 Table of Contents
@@ -40,16 +41,7 @@
 <hr>
 
 ## Running the Site Manually
-To run this website manually (via your ```localhost```), download the required packages and this repository, as described below.
-
-The packages and libraries needed to run this website are listed in the ```requirements.txt``` file. 
-The following command will install all the required packages:
-
-```bash
-pip3 install -r requirements.txt
-```
-
-Next, to clone this repository, enter:
+To run this website manually (via your ```localhost```), first, clone this repository:
 ```bash 
 git clone https://github.com/jschhie/toast-tab-cafe.git [folderNameHere]
 ```
@@ -60,12 +52,23 @@ Next, go into the folder:
 cd [folderNameHere]
 ```
 
+Next, download the required packages and this repository, as described below.
+
+The packages and libraries needed to run this website are listed in the ```requirements.txt``` file. 
+The following command will install all the required packages:
+
+```bash
+pip3 install -r requirements.txt
+```
+
 Finally, enter:
 
 ```bash
 python3 main.py
 ```
 
-The application will then automatically generate a ```cafe_database.db``` database, using SQLAlchemy, in the ```website``` directory.
+<p>The application will then automatically generate a ```cafe_database.db``` database, using SQLAlchemy, in the ```website``` directory.</p>
 
-The user can then access and interact with the website at http://127.0.0.1:5000/ via any web browser. 
+<p>The user can then access and interact with the website at http://127.0.0.1:5000/ via any web browser. </p>
+
+<p>Admin users can access the CRUD dashboard at http://127.0.0.1:5000/admin (as well as: http://127.0.0.1:5000/admin/test) after providing the proper credentials (admin username & password), which can be configured in the <code>__init__.py</code> file.</p>
