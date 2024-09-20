@@ -6,6 +6,8 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask_basicauth import BasicAuth
 
+from flask_babel import Babel
+
 from os import path
 
 db = SQLAlchemy()
@@ -36,6 +38,8 @@ def create_app():
     # create or retrieve existing DB
     from .models import Drink, Topping, MilkType, Order, CustomDrink
     create_database(app)
+
+    babel = Babel(app)
 
     # Add administrative views
     admin = Admin(app, name='cafeOrderingSys', template_mode='bootstrap4')
