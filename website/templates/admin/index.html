@@ -1,0 +1,50 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+  <p style="font-size: large;">Welcome, <b>Admin</b>!</p>
+  <hr>
+
+  <!--
+    <h3>orders</h3>
+  {% if orders|length == 0 %}
+      <p>No orders currently!</p>
+  {% else %}
+      <p>There are {{orders|length}} total orders.</p>
+      {% for order in orders %}
+          {{ order.id }}
+          <br>
+          {{ order.purchase_date }}
+          <br>
+          {{ order.total_price }}
+          <hr>
+      {% endfor %}
+  {% endif %}
+
+  <h3>custom drinks</h3>
+  {% if custom_drinks|length == 0 %}
+      <p>No custom drinks</p>
+  {% else %}
+      {% for custom_drink in custom_drinks %}
+          {{ custom_drink.id }}
+          <br>
+          {{ custom_drink.custom_price }}
+          <br>
+          {{ custom_drink.qty }}
+          <br>
+          {{ custom_drink.order_id }}
+          <br>
+          {{ custom_drink.drink_name }}
+          <br>
+          {{ custom_drink.sugar_lvl }}
+          <br>
+          {{ custom_drink.ice_lvl }}
+          <br>
+          {{ custom_drink.milk_type }}
+          <br>
+          {{ custom_drink.toppings }}
+          <hr>
+      {% endfor %}
+  {% endif %}
+  -->
+
+{% endblock %}

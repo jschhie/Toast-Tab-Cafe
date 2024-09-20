@@ -88,10 +88,3 @@ def checkout():
 @views.route('/error')
 def page_not_found():
     return render_template('error.html')
-
-
-@views.route('/testing')
-def testing():
-    all_orders = Order.query.all()
-    all_custom_drinks = CustomDrink.query.all()
-    return render_template('testing.html', all_orders=all_orders, all_custom_drinks=all_custom_drinks)
