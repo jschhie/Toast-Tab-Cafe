@@ -5,12 +5,12 @@ Sunright Cafe | Testing Database
 {% endblock %}
 
 {% block content %}
-<h1>orders</h1>
-{% if all_orders|length == 0 %}
+<h3>orders</h3>
+{% if orders|length == 0 %}
     <p>No orders currently!</p>
 {% else %}
-    <p>There are {{all_orders|length}} total orders.</p>
-    {% for order in all_orders %}
+    <p>There are {{orders|length}} total orders.</p>
+    {% for order in orders %}
         {{ order.id }}
         <br>
         {{ order.purchase_date }}
@@ -20,11 +20,11 @@ Sunright Cafe | Testing Database
     {% endfor %}
 {% endif %}
 
-<h1>custom drinks</h1>
-{% if all_custom_drinks|length == 0 %}
+<h3>custom drinks</h3>
+{% if custom_drinks|length == 0 %}
     <p>No custom drinks</p>
 {% else %}
-    {% for custom_drink in all_custom_drinks %}
+    {% for custom_drink in custom_drinks %}
         {{ custom_drink.id }}
         <br>
         {{ custom_drink.custom_price }}

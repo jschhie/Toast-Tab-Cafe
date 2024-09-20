@@ -29,8 +29,13 @@
 ### Receipt
 <img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/receipt-1.png">
 
-### Testing Database Orders and CustomDrinks
-<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/testing-db.png">
+### Admin Dashboard
+> Admin access to CRUD dashboard to manage Drinks, Toppings, MilkTypes, Orders, and CustomDrinks
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/admin-view-1.png">
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/admin-view-3-edit.png">
+
+> Admin access to sample summary of Orders and CustomDrinks
+<img src="https://github.com/jschhie/toast-tab-cafe/blob/main/demos/admin-view-2-summary.png">
 
 <hr>
 

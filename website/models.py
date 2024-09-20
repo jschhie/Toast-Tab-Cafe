@@ -6,8 +6,8 @@ class Drink(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), unique=True)
     price = db.Column(db.String(20))
-    img_url = db.Column(db.String(40))
-    thumbnail_url = db.Column(db.String(40))
+    img_url = db.Column(db.String(80))
+    thumbnail_url = db.Column(db.String(80))
     desc = db.Column(db.String(80))
     tag = db.Column(db.String(20))
 

@@ -2,6 +2,10 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+from flask_basicauth import BasicAuth
+
 from os import path
 
 db = SQLAlchemy()
@@ -33,6 +37,42 @@ def create_app():
     from .models import Drink, Topping, MilkType, Order, CustomDrink
     create_database(app)
 
+    # Add administrative views
+    admin = Admin(app, name='cafeOrderingSys', template_mode='bootstrap4')
+    admin.add_view(ModelView(Drink, db.session))
+    admin.add_view(ModelView(Topping, db.session))
+    admin.add_view(ModelView(MilkType, db.session))
+    admin.add_view(ModelView(Order, db.session))
+    admin.add_view(ModelView(CustomDrink, db.session))
+
+    # NOTE: CONFIGURE SECRET AUTH USERNAME AND PASSWORD 
+    app.config['BASIC_AUTH_USERNAME'] = 'SECRET_USERNAME_HERE'
+    app.config['BASIC_AUTH_PASSWORD'] = 'SECRET_PASSWORD_HERE'
+
+    basic_auth = BasicAuth(app)
+
+    # define admin_base_template variable
+    app.config['FLASK_ADMIN_BASE_TEMPLATE'] = 'admin/master.html'
+
+    @app.route('/admin/test')
+    @basic_auth.required
+    def testing_view():
+        orders = Order.query.all()
+        custom_drinks = CustomDrink.query.all()
+        print(orders)
+        print(custom_drinks)
+        return render_template('admin/test.html', orders=orders, custom_drinks=custom_drinks) 
+
+    @app.route('/admin')
+    @basic_auth.required
+    def admin_view():
+        return render_template('admin/index.html')
+        #orders = Order.query.all()
+        #custom_drinks = CustomDrink.query.all()
+        #print(orders)
+        #print(custom_drinks)
+        #return render_template('admin/test.html', orders=orders, custom_drinks=custom_drinks) 
+    
     return app
 
 
