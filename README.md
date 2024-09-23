@@ -1,11 +1,11 @@
-# Toast Tab Cafe
+# Cafe Ordering System
 
 > Flask, Python,  SQLAlchemy, HTML, CSS, Bootstrap, JavaScript, Jinja
 
 ## Overview
-* Responsive online cafe ordering system using Flask and SQLite, implementing customizable drink options, search/filter features, and business hours restrictions
+* Mobile-friendly cafe ordering system using Flask and SQLite, implementing customizable drink options, search/filter features, and business hours restrictions
 * Features an intuitive, secure admin dashboard for managing cafe database
-* Hosted on PythonAnywhere; you may interact with the website at: https://sunrightcafe.pythonanywhere.com/
+* Hosted on PythonAnywhere at: https://sunrightcafe.pythonanywhere.com
 
 ## 🔖 Table of Contents
 * [Website Demo](https://github.com/jschhie/toast-tab-cafe/blob/main/README.md#website-demo)
