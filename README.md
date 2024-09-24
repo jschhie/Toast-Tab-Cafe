@@ -62,7 +62,7 @@ pip3 install -r requirements.txt
 python3 main.py
 ```
 
-<p>The application will automatically generate a ```cafe_database.db``` file in the ```website``` directory.</p>
+<p>The application will automatically generate a <code>cafe_database.db</code> file in the <code>website</code> directory.</p>
 
 <p>Access the website at: http://127.0.0.1:5000/ via any web browser.</p>
 
