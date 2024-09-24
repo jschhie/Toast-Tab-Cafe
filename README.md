@@ -3,8 +3,9 @@
 > Flask, Python,  SQLAlchemy, HTML, CSS, Bootstrap, JavaScript, Jinja
 
 ## Overview
-* Mobile-friendly cafe ordering system using Flask and SQLite, implementing customizable drink options, search/filter features, and business hours restrictions
-* Features an intuitive, secure admin dashboard for managing cafe database
+* Mobile-friendly cafe ordering system built with Flask and SQLite
+* Customizable drink options, search filters, and business hours restrictions
+* Intuitive, secure admin dashboard for managing the cafe database
 * Hosted on PythonAnywhere at: https://sunrightcafe.pythonanywhere.com
 
 ## 🔖 Table of Contents
@@ -41,34 +42,28 @@
 <hr>
 
 ## Running the Site Manually
-To run this website manually (via your ```localhost```), first, clone this repository:
+1. Clone this repository:
 ```bash 
 git clone https://github.com/jschhie/toast-tab-cafe.git [folderNameHere]
 ```
 
-Next, go into the folder: 
-
+2. Navigate into the folder: 
 ```bash 
 cd [folderNameHere]
 ```
 
-Next, download the required packages and this repository, as described below.
-
-The packages and libraries needed to run this website are listed in the ```requirements.txt``` file. 
-The following command will install all the required packages:
-
+3. Install the required packages listed in the ```requirements.txt``` file:
 ```bash
 pip3 install -r requirements.txt
 ```
 
-Finally, enter:
-
+4. Run the Flask app:
 ```bash
 python3 main.py
 ```
 
-<p>The application will then automatically generate a ```cafe_database.db``` database, using SQLAlchemy, in the ```website``` directory.</p>
+<p>The application will automatically generate a ```cafe_database.db``` file in the ```website``` directory.</p>
 
-<p>The user can then access and interact with the website at http://127.0.0.1:5000/ via any web browser. </p>
+<p>Access the website at: http://127.0.0.1:5000/ via any web browser.</p>
 
-<p>Admin users can access the CRUD dashboard at http://127.0.0.1:5000/admin (as well as: http://127.0.0.1:5000/admin/test) after providing the proper credentials (admin username & password), which can be configured in the <code>__init__.py</code> file.</p>
+<p>Admin users can access the CRUD dashboard at: http://127.0.0.1:5000/admin (and http://127.0.0.1:5000/admin/test) after configuring credentials (username & password) in the <code>__init__.py</code> file.</p>
