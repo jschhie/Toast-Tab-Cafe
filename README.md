@@ -3,7 +3,7 @@
 > Flask, Python,  SQLAlchemy, HTML, CSS, Bootstrap, JavaScript, Jinja
 
 ## Overview
-* Mobile-friendly cafe ordering system built with Flask and SQLite
+* Mobile-friendly cafe ordering system built with a Flask/Python backend
 * Customizable drink options, search filters, and business hours restrictions
 * Intuitive, secure admin dashboard for managing the cafe database
 * Hosted on PythonAnywhere at: https://sunrightcafe.pythonanywhere.com
@@ -52,7 +52,7 @@ git clone https://github.com/jschhie/toast-tab-cafe.git [folderNameHere]
 cd [folderNameHere]
 ```
 
-3. Install the required packages listed in the ```requirements.txt``` file:
+3. Install the required packages:
 ```bash
 pip3 install -r requirements.txt
 ```
