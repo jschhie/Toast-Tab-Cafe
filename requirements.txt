@@ -1,4 +1,4 @@
-Flask==2.0.0
+Flask==2.2.5
 Flask_Admin==1.6.1
 flask_babel==4.0.0
 Flask_BasicAuth==0.2.0
